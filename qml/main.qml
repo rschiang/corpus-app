@@ -1,25 +1,17 @@
 import QtQuick 2.0
-import QtGraphicalEffects 1.0
-import "material"
+import QtQuick.Window 2.0
 
-Rectangle {
-    width: 450
-    height: 800
+Window {
+    id: root
+    width: Screen.width
+    height: Screen.height
+    visible: true
+    title: "Corpus"
     color: "#eee"
 
-    Card {
-        anchors.centerIn: parent
-        width: 240
-        height: 100
-        radius: 3
+    property real dp: Math.max(0.5, Screen.pixelDensity * 25.4 / 160)
+    property string platformFont: "Roboto"
 
-        Text {
-            anchors.centerIn: parent
-            font.family: "Roboto"
-            font.capitalization: Font.AllUppercase
-            font.pixelSize: 34
-            renderType: Text.NativeRendering
-            text: "ACCEPT"
-        }
+    MainView {
     }
 }
