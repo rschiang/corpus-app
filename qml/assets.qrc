@@ -4,5 +4,6 @@
         <file>MainView.qml</file>
         <file>material/Card.qml</file>
         <file>material/PaperShadow.qml</file>
+        <file>material/PaperRipple.qml</file>
     </qresource>
 </RCC>
