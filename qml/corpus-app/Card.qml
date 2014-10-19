@@ -3,6 +3,7 @@ import QtGraphicalEffects 1.0
 
 Item {
     id: root
+    state: mouseArea.pressed ? "z-2" : "z-1"
 
     Rectangle {
         id: background
@@ -16,11 +17,6 @@ Item {
         id: topShadow
         anchors.fill: parent
         source: background
-
-        color: "#1e000000"
-        horizontalOffset: 0
-        verticalOffset: 1
-        radius: 1.5
         spread: 0.0
         samples: 32
         transparentBorder: true
@@ -30,53 +26,47 @@ Item {
         id: bottomShadow
         anchors.fill: parent
         source: background
-
-        color: "#3d000000"
-        horizontalOffset: 0
-        verticalOffset: 1
-        radius: 1.0
         spread: 0.0
         samples: 32
         transparentBorder: true
     }
 
-    ParallelAnimation {
-        id: pressedAnimation
-        ColorAnimation { target: topShadow; to: "#50000000"; duration: 200; }
-        ColorAnimation { target: bottomShadow; to: "#3a000000"; duration: 200; }
-        SmoothedAnimation { target: topShadow; property: "verticalOffset"; to: 10; duration: 200; }
-        SmoothedAnimation { target: topShadow; property: "radius"; to: 10; duration: 200; }
-        SmoothedAnimation { target: bottomShadow; property: "verticalOffset"; to: 6; duration: 200; }
-        SmoothedAnimation { target: bottomShadow; property: "radius"; to: 3; duration: 200; }
-        SequentialAnimation {
-            SmoothedAnimation { target: overlay; property: "opacity"; to: 0.4; duration: 200; easing.type: Easing.OutQuint; }
-            ScriptAction { script: if (!mouseArea.pressed) releasedAnimation.start() }
+    states: [
+        State {
+            name: "z-0"
+            PropertyChanges { target: topShadow; verticalOffset: 0; radius: 0; color: "#00000000" }
+            PropertyChanges { target: bottomShadow; verticalOffset: 0; radius: 0; color: "#00000000" }
+        },
+        State {
+            name: "z-1"
+            PropertyChanges { target: topShadow; verticalOffset: 2; radius: 10; color: "#28000000" }
+            PropertyChanges { target: bottomShadow; verticalOffset: 2; radius: 5; color: "#42000000" }
+        },
+        State {
+            name: "z-2"
+            PropertyChanges { target: topShadow; verticalOffset: 6; radius: 20; color: "#30000000" }
+            PropertyChanges { target: bottomShadow; verticalOffset: 8; radius: 17; color: "#33000000" }
         }
-    }
+    ]
 
-    ParallelAnimation {
-        id: releasedAnimation
-        ColorAnimation { target: topShadow; to: "#1e000000"; duration: 500; }
-        ColorAnimation { target: bottomShadow; to: "#3d000000"; duration: 500; }
-        SmoothedAnimation { target: overlay; property: "opacity"; to: 0; duration: 500; }
-        SmoothedAnimation { target: topShadow; property: "verticalOffset"; to: 1; duration: 500; }
-        SmoothedAnimation { target: topShadow; property: "radius"; to: 1.5; duration: 500; }
-        SmoothedAnimation { target: bottomShadow; property: "verticalOffset"; to: 1; duration: 500; }
-        SmoothedAnimation { target: bottomShadow; property: "radius"; to: 1; duration: 500; }
-    }
+    transitions: [
+        Transition {
+            NumberAnimation {
+                targets: [topShadow, bottomShadow]
+                properties: "verticalOffset,radius"
+                duration: 280
+                easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+            }
+            ColorAnimation {
+                targets: [topShadow, bottomShadow]
+                duration: 280
+            }
+        }
 
-    Rectangle {
-        id: overlay
-        anchors.fill: parent
-        color: "#999"
-        radius: 2
-        opacity: 0
-    }
+    ]
 
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        onPressed: pressedAnimation.start()
-        onReleased: if (!pressedAnimation.running) releasedAnimation.start()
     }
 }
