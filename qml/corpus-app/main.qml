@@ -8,8 +8,8 @@ Rectangle {
 
     Card {
         anchors.centerIn: parent
-        width: 200
-        height: 200
+        width: 100
+        height: 100
 
         Text {
             anchors.centerIn: parent

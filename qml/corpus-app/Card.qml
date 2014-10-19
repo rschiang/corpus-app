@@ -31,6 +31,52 @@ Item {
         transparentBorder: true
     }
 
+    Rectangle {
+        id: rippleContainer
+        anchors.fill: parent
+        color: "#00ffffff"
+        radius: 2
+        clip: true
+    }
+
+    Component {
+        id: ripple
+
+        Rectangle {
+            id: ink
+            radius: width
+            opacity: 0.25
+            color: "black"
+            property int startX
+            property int startY
+            property int maxRadius
+
+            ParallelAnimation {
+                id: growAnimation
+                NumberAnimation { target: ink; property: "x"; from: startX; to: startX - maxRadius; duration: 1100; }
+                NumberAnimation { target: ink; property: "y"; from: startY; to: startY - maxRadius; duration: 1100; }
+                NumberAnimation { target: ink; properties: "width,height"; from: 0; to: maxRadius * 2; duration: 1100; }
+            }
+
+            SequentialAnimation {
+                id: fadeAnimation
+                NumberAnimation { target: ink; property: "opacity"; from: 0.25; to: 0; duration: 312; }
+                ScriptAction { script: ink.destroy() }
+            }
+
+            Connections {
+                target: mouseArea
+                onReleased: if (!fadeAnimation.running) fadeAnimation.start()
+            }
+
+            Component.onCompleted: {
+                growAnimation.start()
+                if (!(mouseArea.pressed || fadeAnimation.running))
+                    fadeAnimation.start()
+            }
+        }
+    }
+
     states: [
         State {
             name: "z-0"
@@ -68,5 +114,20 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
+        onPressed: {
+            var wave = ripple.createObject(rippleContainer, {
+                                               startX: mouseX, startY: mouseY,
+                                               maxRadius: furthestDistance(mouseX, mouseY)
+                                           })
+        }
+
+        function distance(x1, y1, x2, y2) {
+            return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2))
+        }
+
+        function furthestDistance(x, y) {
+            return Math.max(distance(x, y, 0, 0), distance(x, y, width, height),
+                            distance(x, y, 0, height), distance(x, y, width, 0))
+        }
     }
 }
