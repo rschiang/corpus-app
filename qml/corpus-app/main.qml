@@ -8,12 +8,16 @@ Rectangle {
 
     Card {
         anchors.centerIn: parent
-        width: 100
+        width: 240
         height: 100
 
         Text {
             anchors.centerIn: parent
-            text: "Hello"
+            font.family: "Roboto"
+            font.capitalization: Font.AllUppercase
+            font.pixelSize: 34
+            renderType: Text.NativeRendering
+            text: "ACCEPT"
         }
     }
 }
