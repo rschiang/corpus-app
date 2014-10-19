@@ -16,7 +16,7 @@ Card {
         fillMode: Image.PreserveAspectCrop
         clip: true
 
-        source: post.photos || ""
+        source: post.photos ? api.photo(post.photos) : ""
     }
 
     Text {

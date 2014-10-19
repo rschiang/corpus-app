@@ -9,6 +9,8 @@ Item {
         id: posts
         anchors.fill: parent
 
+        model: ListModel {}
+
         delegate: Component {
             Item {
                 anchors.left: parent.left
@@ -28,7 +30,7 @@ Item {
             }
         }
 
-        populate: Transition {
+        add: Transition {
             NumberAnimation {
                 properties: "x"
                 duration: 300
@@ -46,6 +48,18 @@ Item {
         }
 
         color: "#5677fc"
-        iconSource: "qrc:/assets/icon_add"
+        iconSource: "qrc:/assets/icon_refresh"
+
+        onClicked: load()
     }
+
+    function load() {
+        api.posts(function(e) {
+            e = JSON.parse(e)
+            for (var i in e)
+                posts.model.append(e[i])
+        })
+    }
+
+    Component.onCompleted: load()
 }
