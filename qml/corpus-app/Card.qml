@@ -3,7 +3,6 @@ import QtGraphicalEffects 1.0
 
 Item {
     id: root
-    state: mouseArea.pressed ? "pressed" : "normal"
 
     Rectangle {
         id: background
@@ -17,7 +16,6 @@ Item {
         id: topShadow
         anchors.fill: parent
         source: background
-        cached: true
 
         color: "#1e000000"
         horizontalOffset: 0
@@ -32,7 +30,6 @@ Item {
         id: bottomShadow
         anchors.fill: parent
         source: background
-        cached: true
 
         color: "#3d000000"
         horizontalOffset: 0
@@ -43,40 +40,43 @@ Item {
         transparentBorder: true
     }
 
-    states: [
-        State {
-            name: "normal"
-            PropertyChanges { target: topShadow; color: "#1e000000"; verticalOffset: 1; radius: 1.5; }
-            PropertyChanges { target: bottomShadow; color: "#3d000000"; verticalOffset: 1; radius: 1; }
-        },
-        State {
-            name: "pressed"
-            PropertyChanges { target: topShadow; color: "#30000000"; verticalOffset: 10; radius: 10; }
-            PropertyChanges { target: bottomShadow; color: "#3a000000"; verticalOffset: 6; radius: 3; }
+    ParallelAnimation {
+        id: pressedAnimation
+        ColorAnimation { target: topShadow; to: "#50000000"; duration: 200; }
+        ColorAnimation { target: bottomShadow; to: "#3a000000"; duration: 200; }
+        SmoothedAnimation { target: topShadow; property: "verticalOffset"; to: 10; duration: 200; }
+        SmoothedAnimation { target: topShadow; property: "radius"; to: 10; duration: 200; }
+        SmoothedAnimation { target: bottomShadow; property: "verticalOffset"; to: 6; duration: 200; }
+        SmoothedAnimation { target: bottomShadow; property: "radius"; to: 3; duration: 200; }
+        SequentialAnimation {
+            SmoothedAnimation { target: overlay; property: "opacity"; to: 0.4; duration: 200; easing.type: Easing.OutQuint; }
+            ScriptAction { script: if (!mouseArea.pressed) releasedAnimation.start() }
         }
-    ]
+    }
 
-    transitions: [
-        Transition {
-            from: "normal"
-            to: "pressed"
-            ColorAnimation { target: topShadow; duration: 100 }
-            ColorAnimation { target: bottomShadow; duration: 100 }
-            NumberAnimation { target: topShadow; properties: "radius,verticalOffset"; duration: 100 }
-            NumberAnimation { target: bottomShadow; properties: "radius,verticalOffset"; duration: 100 }
-        },
-        Transition {
-            from: "pressed"
-            to: "normal"
-            ColorAnimation { target: topShadow; duration: 300 }
-            ColorAnimation { target: bottomShadow; duration: 300 }
-            NumberAnimation { target: topShadow; properties: "radius,verticalOffset"; duration: 300 }
-            NumberAnimation { target: bottomShadow; properties: "radius,verticalOffset"; duration: 300 }
-        }
-    ]
+    ParallelAnimation {
+        id: releasedAnimation
+        ColorAnimation { target: topShadow; to: "#1e000000"; duration: 500; }
+        ColorAnimation { target: bottomShadow; to: "#3d000000"; duration: 500; }
+        SmoothedAnimation { target: overlay; property: "opacity"; to: 0; duration: 500; }
+        SmoothedAnimation { target: topShadow; property: "verticalOffset"; to: 1; duration: 500; }
+        SmoothedAnimation { target: topShadow; property: "radius"; to: 1.5; duration: 500; }
+        SmoothedAnimation { target: bottomShadow; property: "verticalOffset"; to: 1; duration: 500; }
+        SmoothedAnimation { target: bottomShadow; property: "radius"; to: 1; duration: 500; }
+    }
+
+    Rectangle {
+        id: overlay
+        anchors.fill: parent
+        color: "#999"
+        radius: 2
+        opacity: 0
+    }
 
     MouseArea {
         id: mouseArea
         anchors.fill: parent
+        onPressed: pressedAnimation.start()
+        onReleased: if (!pressedAnimation.running) releasedAnimation.start()
     }
 }
