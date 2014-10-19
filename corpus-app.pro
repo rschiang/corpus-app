@@ -1,21 +1,19 @@
-# Add more folders to ship with the application, here
-folder_01.source = qml/corpus-app
-folder_01.target = qml
-DEPLOYMENTFOLDERS = folder_01
+TEMPLATE = app
 
-# Additional import path used to resolve QML modules in Creator's code model
-QML_IMPORT_PATH =
+TARGET = Corpus
 
-# The .cpp file which was generated for your project. Feel free to hack it.
-SOURCES += main.cpp
+QT += qml quick network sql
 
-# Installation path
-# target.path =
+SOURCES += src/main.cpp
+
+RESOURCES += qml/assets.qrc
+
+OTHER_FILES += qml/*.qml \
+    qml/material/*.qml
 
 mac {
+    QMAKE_INFO_PLIST = platform/mac/Info.plist
+    ICON = platform/mac/icon.icns
+    #QMAKE_POST_LINK += macdeployqt Terrarium.app/ -qmldir=qml/ -verbose=1 -dmg
     QMAKE_MAC_SDK = macosx10.9
 }
-
-# Please do not modify the following two lines. Required for deployment.
-include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
-qtcAddDeployment()
