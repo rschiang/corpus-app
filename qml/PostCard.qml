@@ -32,7 +32,7 @@ Card {
         Text {
             width: parent.width
             font.family: platformFont
-            font.pointSize: 14 * dp
+            font.pointSize: 14
             font.bold: Font.DemiBold
             color: "#de000000"
             wrapMode: Text.Wrap
@@ -47,7 +47,7 @@ Card {
         Text {
             width: parent.width
             font.family: platformFont
-            font.pointSize: 14 * dp
+            font.pointSize: 14
             color: "#de000000"
             wrapMode: Text.Wrap
 

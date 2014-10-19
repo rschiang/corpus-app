@@ -27,7 +27,7 @@ Item {
         id: label
         anchors.centerIn: parent
         font.family: platformFont
-        font.pointSize: 14 * dp
+        font.pointSize: 14
         font.bold: Font.DemiBold
         font.capitalization: Font.AllUppercase
         color: "#de000000"

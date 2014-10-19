@@ -22,7 +22,7 @@ Item {
                     x: 72 * dp
                     anchors.verticalCenter: parent.verticalCenter
                     font.family: platformFont
-                    font.pointSize: 20 * dp
+                    font.pointSize: 20
                     font.bold: Font.DemiBold
                     color: "#de000000"
                     text: "Corpus"
