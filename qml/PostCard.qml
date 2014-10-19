@@ -4,7 +4,7 @@ import "material"
 Card {
     id: card
     width: parent.width
-    height: image.height + label.paintedHeight + 32 * dp
+    height: image.height + content.height + 32 * dp
 
     property variant post: ({})
 
@@ -19,20 +19,39 @@ Card {
         source: post.photos ? api.photo(post.photos) : ""
     }
 
-    Text {
-        id: label
+    Column {
+        id: content
         anchors {
             left: parent.left
             right: parent.right
             top: image.bottom
             margins: 16 * dp
         }
+        spacing: 8 * dp
 
-        font.family: platformFont
-        font.pointSize: 14 * dp
-        color: "#de000000"
-        wrapMode: Text.Wrap
+        Text {
+            width: parent.width
+            font.family: platformFont
+            font.pointSize: 14 * dp
+            font.bold: Font.DemiBold
+            color: "#de000000"
+            wrapMode: Text.Wrap
 
-        text: post.description || ""
+            text: ((post.textTime ?
+                   (post.textTime.num +
+                    (["", " mins", " hours"])[["_Minute_", "_Hour_"]
+                                              .indexOf(post.textTime.unit) + 1] + " ") : "") +
+                  (post.commentNum > 0 ? "+" + post.commentNum : "")).trim()
+        }
+
+        Text {
+            width: parent.width
+            font.family: platformFont
+            font.pointSize: 14 * dp
+            color: "#de000000"
+            wrapMode: Text.Wrap
+
+            text: post.description || ""
+        }
     }
 }
