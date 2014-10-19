@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>MainView.qml</file>
         <file>material/Card.qml</file>
+        <file>material/PaperShadow.qml</file>
     </qresource>
 </RCC>
