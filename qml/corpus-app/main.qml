@@ -10,6 +10,7 @@ Rectangle {
         anchors.centerIn: parent
         width: 240
         height: 100
+        radius: 3
 
         Text {
             anchors.centerIn: parent

@@ -5,11 +5,14 @@ Item {
     id: root
     state: root.enabled ? (mouseArea.pressed ? "z-2" : "z-1") : "z-0"
 
+    property int radius: 2
+    property color color: "#de000000"
+
     Rectangle {
         id: background
         anchors.fill: parent
         color: root.enabled ? "white" : "#eaeaea"
-        radius: 2
+        radius: root.radius
         visible: false
     }
 
@@ -35,7 +38,7 @@ Item {
         id: rippleContainer
         anchors.fill: parent
         color: "#00ffffff"
-        radius: 2
+        radius: root.radius
         clip: true
     }
 
@@ -46,7 +49,7 @@ Item {
             id: ink
             radius: 0
             opacity: 0.25
-            color: "#de000000"
+            color: root.color
             property int startX
             property int startY
             property int maxRadius: 150
@@ -118,6 +121,7 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
+        enabled: root.enabled
         onPressed: {
             var wave = ripple.createObject(rippleContainer, {
                                                startX: mouseX, startY: mouseY,
