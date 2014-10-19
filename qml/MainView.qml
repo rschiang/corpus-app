@@ -18,6 +18,14 @@ Item {
                 width: parent.width
                 height: 56 * dp
 
+                Image {
+                    source: "qrc:/assets/icon_menu"
+                    width: 24 * dp
+                    height: 24 * dp
+                    x: 16 * dp
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
                 Text {
                     id: title
                     x: 72 * dp
@@ -73,4 +81,6 @@ Item {
                 posts.model.append(e[i])
         })
     }
+
+    Component.onCompleted: load()
 }

@@ -14,5 +14,6 @@
         <file alias="icon_add">assets/icon_add.svg</file>
         <file alias="icon_refresh">assets/icon_refresh.svg</file>
         <file alias="icon_send">assets/icon_send.svg</file>
+        <file alias="icon_menu">assets/icon_menu.svg</file>
     </qresource>
 </RCC>
