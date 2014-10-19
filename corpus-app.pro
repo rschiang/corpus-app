@@ -2,7 +2,7 @@ TEMPLATE = app
 
 TARGET = Corpus
 
-QT += qml quick network sql
+QT += qml quick network sql svg
 
 SOURCES += src/main.cpp
 

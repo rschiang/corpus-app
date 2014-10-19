@@ -9,7 +9,7 @@ Window {
     title: "Corpus"
     color: "#eee"
 
-    property real dp: 1.5 //Math.max(0.5, Screen.pixelDensity * 25.4 / 160)
+    property real dp: Math.max(0.5, Screen.pixelDensity * 25.4 / 160)
     property string platformFont: "Roboto"
 
     MainView {
