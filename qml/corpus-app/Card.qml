@@ -3,12 +3,12 @@ import QtGraphicalEffects 1.0
 
 Item {
     id: root
-    state: mouseArea.pressed ? "z-2" : "z-1"
+    state: root.enabled ? (mouseArea.pressed ? "z-2" : "z-1") : "z-0"
 
     Rectangle {
         id: background
         anchors.fill: parent
-        color: "white"
+        color: root.enabled ? "white" : "#eaeaea"
         radius: 2
         visible: false
     }
