@@ -8,6 +8,7 @@ Item {
     ListView {
         id: posts
         anchors.fill: parent
+        cacheBuffer: height
 
         model: ListModel {}
 
@@ -48,14 +49,6 @@ Item {
                 }
             }
         }
-
-        add: Transition {
-            NumberAnimation {
-                properties: "x"
-                duration: 300
-                easing.type: Easing.OutCubic
-            }
-        }
     }
 
     FloatingActionButton {
@@ -80,6 +73,4 @@ Item {
                 posts.model.append(e[i])
         })
     }
-
-    Component.onCompleted: load()
 }
