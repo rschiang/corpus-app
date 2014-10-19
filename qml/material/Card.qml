@@ -3,6 +3,8 @@ import QtQuick 2.0
 Item {
     id: root
 
+    signal clicked
+
     Rectangle {
         id: background
         anchors.fill: parent
@@ -21,5 +23,6 @@ Item {
         id: mouseArea
         anchors.fill: parent
         enabled: root.enabled
+        onClicked: root.clicked()
     }
 }

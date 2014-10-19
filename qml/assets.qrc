@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>MainView.qml</file>
+        <file>PostCard.qml</file>
         <file>material/PaperShadow.qml</file>
         <file>material/PaperRipple.qml</file>
         <file>material/RaisedButton.qml</file>
@@ -10,6 +11,7 @@
     </qresource>
     <qresource prefix="/assets">
         <file alias="icon_add">assets/icon_add.svg</file>
+        <file alias="icon_refresh">assets/icon_refresh.svg</file>
         <file alias="icon_send">assets/icon_send.svg</file>
     </qresource>
 </RCC>
