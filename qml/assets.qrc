@@ -8,4 +8,8 @@
         <file>material/FloatingActionButton.qml</file>
         <file>material/Card.qml</file>
     </qresource>
+    <qresource prefix="/assets">
+        <file alias="icon_add">assets/icon_add.svg</file>
+        <file alias="icon_send">assets/icon_send.svg</file>
+    </qresource>
 </RCC>

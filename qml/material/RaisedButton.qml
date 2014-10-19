@@ -23,12 +23,6 @@ Item {
         depth: root.enabled ? (mouseArea.pressed ? 3 : 1) : 0
     }
 
-    PaperRipple {
-        id: ripple
-        radius: 2 * dp
-        mouseArea: mouseArea
-    }
-
     Text {
         id: label
         anchors.centerIn: parent
@@ -39,9 +33,16 @@ Item {
         color: "#de000000"
     }
 
+    PaperRipple {
+        id: ripple
+        radius: 2 * dp
+        mouseArea: mouseArea
+    }
+
     MouseArea {
         id: mouseArea
         anchors.fill: parent
         enabled: root.enabled
+        onClicked: root.clicked()
     }
 }

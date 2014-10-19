@@ -53,6 +53,7 @@ Item {
             margins: 16 * dp
         }
 
-        color: "#259b24"
+        color: "#5677fc"
+        iconSource: "qrc:/assets/icon_add"
     }
 }
