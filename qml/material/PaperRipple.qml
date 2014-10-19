@@ -34,7 +34,7 @@ Item {
 
             NumberAnimation {
                 id: growAnimation
-                target: ink; property: "radius"; from: 0; to: maxRadius; duration: 1100
+                target: ink; property: "radius"; from: 0; to: maxRadius; duration: 550
                 easing.type: Easing.OutCubic
             }
 
