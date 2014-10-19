@@ -44,18 +44,22 @@ Item {
 
         Rectangle {
             id: ink
-            radius: width
+            radius: 0
             opacity: 0.25
-            color: "black"
+            color: "#de000000"
             property int startX
             property int startY
-            property int maxRadius
+            property int maxRadius: 150
 
-            ParallelAnimation {
+            x: startX - radius
+            y: startY - radius
+            width: radius * 2
+            height: radius * 2
+
+            NumberAnimation {
                 id: growAnimation
-                NumberAnimation { target: ink; property: "x"; from: startX; to: startX - maxRadius; duration: 1100; }
-                NumberAnimation { target: ink; property: "y"; from: startY; to: startY - maxRadius; duration: 1100; }
-                NumberAnimation { target: ink; properties: "width,height"; from: 0; to: maxRadius * 2; duration: 1100; }
+                target: ink; property: "radius"; from: 0; to: maxRadius; duration: 1100
+                easing.type: Easing.OutCubic
             }
 
             SequentialAnimation {
