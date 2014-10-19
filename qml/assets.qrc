@@ -5,6 +5,7 @@
         <file>material/PaperShadow.qml</file>
         <file>material/PaperRipple.qml</file>
         <file>material/RaisedButton.qml</file>
+        <file>material/FloatingActionButton.qml</file>
         <file>material/Card.qml</file>
     </qresource>
 </RCC>

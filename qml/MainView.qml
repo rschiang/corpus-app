@@ -45,4 +45,14 @@ Item {
             }
         }
     }
+
+    FloatingActionButton {
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            margins: 16 * dp
+        }
+
+        color: "#259b24"
+    }
 }
