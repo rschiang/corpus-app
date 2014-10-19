@@ -24,7 +24,7 @@ Item {
 
     PaperRipple {
         id: ripple
-        radius: 2 * dp
+        radius: 28 * dp
         color: "#deffffff"
         mouseArea: mouseArea
     }

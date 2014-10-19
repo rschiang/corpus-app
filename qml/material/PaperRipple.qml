@@ -1,18 +1,31 @@
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 
 Item {
     id: root
     anchors.fill: parent
 
-    property alias radius: container.radius
+    property alias radius: mask.radius
     property color color: "#de000000"
     property alias mouseArea: connections.target
 
     Rectangle {
+        id: mask
+        anchors.fill: parent
+        color: "black"
+        visible: false
+    }
+
+    Item {
         id: container
         anchors.fill: parent
-        color: "#00ffffff"
-        clip: true
+        visible: false
+    }
+
+    OpacityMask {
+        anchors.fill: parent
+        source: container
+        maskSource: mask
     }
 
     Component {
