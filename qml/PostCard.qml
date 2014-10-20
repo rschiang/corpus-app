@@ -43,14 +43,12 @@ Card {
                     margins: 16 * dp
                 }
 
-                font.family: platformFont
-                font.pointSize: text.length <= 16 ? 16 : 14
+                font.family: "Roboto Slab"
+                font.pointSize: text.length <= 16 ? 20 : 16
                 color: "#de000000"
                 wrapMode: Text.Wrap
 
-                text: post.description ?
-                        formatText(formatTime() + " - ", "14pt", "#8a000000") +
-                        post.description : ""
+                text: post.description || ""
             }
         }
 
@@ -62,7 +60,8 @@ Card {
                 id: likeButton
                 anchors {
                     verticalCenter: parent.verticalCenter
-                    right: commentButton.left
+                    left: parent.left
+                    margins: 8 * dp
                 }
 
                 inline: true
@@ -74,21 +73,26 @@ Card {
                 id: commentButton
                 anchors {
                     verticalCenter: parent.verticalCenter
-                    right: parent.right
+                    left: likeButton.right
                     margins: 8 * dp
                 }
 
                 inline: true
                 text: post.commentNum > 0 ? ("留言(%d)".replace("%d", post.commentNum)) : "留言"
             }
-        }
-    }
 
-    function formatText(text, size, color) {
-        return ("<font color='{{ color }}' size='{{ size }}'>{{ text }}</font>"
-                .replace("{{ color }}", color)
-                .replace("{{ size }}", size)
-                .replace("{{ text }}", text))
+            Text {
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                    margins: 16 * dp
+                }
+                font.family: platformFont
+                font.pointSize: 14
+                color: "#8a000000"
+                text: post.textTime ? formatTime() : ""
+            }
+        }
     }
 
     function formatTime() {
