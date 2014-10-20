@@ -3,8 +3,8 @@ import "material"
 
 Card {
     id: card
-    width: parent.width
-    height: layout.height
+    implicitWidth: parent.width
+    implicitHeight: layout.height
 
     property variant post: ({})
 

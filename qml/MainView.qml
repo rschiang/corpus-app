@@ -53,30 +53,27 @@ Item {
         anchors.topMargin: actionBar.height
         cacheBuffer: height
 
+        topMargin: 8 * dp
+        bottomMargin: 8 * dp
+        spacing: 8 * dp
+
         model: ListModel {}
 
         delegate: Component {
-            Item {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                height: 8 * dp + __postCard.height
-
-                PostCard {
-                    id: __postCard
-                    post: model
-                    y: 8 * dp
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        margins: 8 * dp
-                    }
+            PostCard {
+                id: __postCard
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: 8 * dp
                 }
+                post: model
             }
         }
 
         NumberAnimation on contentY {
             id: scrollToTopAnimation
-            to: 0
+            to: posts.originY
             duration: 300
             easing.type: Easing.OutCubic
         }
