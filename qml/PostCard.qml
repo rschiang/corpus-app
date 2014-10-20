@@ -13,15 +13,15 @@ Card {
         width: parent.width
 
         Rectangle {
-            width: image.width
+            width: parent.width
             height: image.height
             color: "#1a999999"
-            visible: !!image.source
+            visible: (height > 0)
 
             Image {
                 id: image
                 width: parent.width
-                height: source ? parent.width * 0.6 : 0
+                height: post.photos ? parent.width * 0.6 : 0
                 fillMode: Image.PreserveAspectCrop
                 clip: true
 

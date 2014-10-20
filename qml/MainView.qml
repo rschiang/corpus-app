@@ -51,7 +51,7 @@ Item {
         id: posts
         anchors.fill: parent
         anchors.topMargin: actionBar.height
-        cacheBuffer: height
+        cacheBuffer: height * 4
 
         topMargin: 8 * dp
         bottomMargin: 8 * dp
@@ -76,6 +76,7 @@ Item {
             to: posts.originY
             duration: 300
             easing.type: Easing.OutCubic
+            onStopped: posts.returnToBounds()
         }
     }
 
