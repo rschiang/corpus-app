@@ -3,7 +3,7 @@ import QtQuick 2.0
 QtObject {
     id: api
 
-    // TODO: Hook your own server UI
+    // TODO: Hook your own server URL
     property string baseUrl: "http://example.com/api/"
 
     function photo(path) {
