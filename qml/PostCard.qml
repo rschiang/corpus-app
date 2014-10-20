@@ -4,59 +4,67 @@ import "material"
 Card {
     id: card
     width: parent.width
-    height: image.height + content.height + 32 * dp
+    height: layout.height
 
     property variant post: ({})
 
-    Image {
-        id: image
-        width: parent.width
-        height: status == Image.Ready ? parent.width * 0.67 : 0
-        asynchronous: true
-        fillMode: Image.PreserveAspectCrop
-        clip: true
-
-        source: post.photos ? api.photo(post.photos) : ""
-    }
-
     Column {
-        id: content
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: image.bottom
-            margins: 16 * dp
-        }
-        spacing: 8 * dp
+        id: layout
+        width: parent.width
 
-        Text {
-            font.family: platformFont
-            font.pointSize: 14
-            color: "#8a000000"
-            text: post.textTime ? ["%s", "%ss", "%sm", "%sh", "昨天"][
-                                  ["_Second_", "_Minute_", "_Hour_", "_Yesterday_"]
-                                  .indexOf(post.textTime.unit) + 1]
-                                  .replace("%s", post.textTime.num)
-                                  .trim()
-                                : ""
+        Rectangle {
+            width: image.width
+            height: image.height
+            color: "#1a999999"
+            visible: !!image.source
+
+            Image {
+                id: image
+                width: parent.width
+                height: source ? parent.width * 0.6 : 0
+                fillMode: Image.PreserveAspectCrop
+                clip: true
+
+                asynchronous: true
+                source: post.photos ? api.photo(post.photos) : ""
+            }
         }
 
-        Text {
+        Item {
             width: parent.width
-            font.family: platformFont
-            font.pointSize: text.length <= 16 ? 16 : 14
-            color: "#de000000"
-            wrapMode: Text.Wrap
+            height: article.paintedHeight + 32 * dp
 
-            text: post.description || ""
+            Text {
+                id: article
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                    margins: 16 * dp
+                }
+
+                font.family: platformFont
+                font.pointSize: text.length <= 16 ? 16 : 14
+                color: "#de000000"
+                wrapMode: Text.Wrap
+
+                text: post.description ?
+                        formatText(formatTime() + " - ", "14pt", "#8a000000") +
+                        post.description : ""
+            }
         }
 
-        Row {
-            spacing: 8 * dp
-            anchors.margins: -16 * dp
+        Item {
+            width: parent.width
+            height: 56 * dp
 
             FlatButton {
                 id: likeButton
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: commentButton.left
+                }
+
                 inline: true
                 text: post.starredNum > 0 ? ("+" + post.starredNum) : "+1"
                 textColor: post.starred ? "#5d4037" : "#de000000"
@@ -64,9 +72,30 @@ Card {
 
             FlatButton {
                 id: commentButton
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                    margins: 8 * dp
+                }
+
                 inline: true
                 text: post.commentNum > 0 ? ("留言(%d)".replace("%d", post.commentNum)) : "留言"
             }
         }
+    }
+
+    function formatText(text, size, color) {
+        return ("<font color='{{ color }}' size='{{ size }}'>{{ text }}</font>"
+                .replace("{{ color }}", color)
+                .replace("{{ size }}", size)
+                .replace("{{ text }}", text))
+    }
+
+    function formatTime() {
+        var formats = {"_Second_": "%d 秒前", "_Minute_": "%d 分鐘前", "_Hour_": "%d 小時前", "_Yesterday_": "昨天"}
+        if (post.textTime.unit in formats)
+            return formats[post.textTime.unit].replace("%d", post.textTime.num)
+        else
+            return post.textTime.num
     }
 }
