@@ -11,7 +11,7 @@ Card {
     Image {
         id: image
         width: parent.width
-        height: status == Image.Ready ? parent.width * 0.75 : 0
+        height: status == Image.Ready ? parent.width * 0.67 : 0
         asynchronous: true
         fillMode: Image.PreserveAspectCrop
         clip: true
@@ -33,21 +33,20 @@ Card {
             width: parent.width
             font.family: platformFont
             font.pointSize: 14
-            font.bold: Font.DemiBold
-            color: "#de000000"
+            color: "#8a000000"
             wrapMode: Text.Wrap
-
-            text: ((post.textTime ?
-                   (post.textTime.num +
-                    (["", " mins", " hours"])[["_Minute_", "_Hour_"]
-                                              .indexOf(post.textTime.unit) + 1] + " ") : "") +
-                  (post.commentNum > 0 ? "+" + post.commentNum : "")).trim()
+            text: post.textTime ? ["%s", "%ss", "%sm", "%sh", "昨天"][
+                                  ["_Second_", "_Minute_", "_Hour_", "_Yesterday_"]
+                                  .indexOf(post.textTime.unit) + 1]
+                                  .replace("%s", post.textTime.num)
+                                  .trim()
+                                : ""
         }
 
         Text {
             width: parent.width
             font.family: platformFont
-            font.pointSize: 14
+            font.pointSize: text.length <= 16 ? 16 : 14
             color: "#de000000"
             wrapMode: Text.Wrap
 
