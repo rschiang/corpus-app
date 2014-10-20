@@ -30,11 +30,9 @@ Card {
         spacing: 8 * dp
 
         Text {
-            width: parent.width
             font.family: platformFont
             font.pointSize: 14
             color: "#8a000000"
-            wrapMode: Text.Wrap
             text: post.textTime ? ["%s", "%ss", "%sm", "%sh", "昨天"][
                                   ["_Second_", "_Minute_", "_Hour_", "_Yesterday_"]
                                   .indexOf(post.textTime.unit) + 1]
@@ -51,6 +49,24 @@ Card {
             wrapMode: Text.Wrap
 
             text: post.description || ""
+        }
+
+        Row {
+            spacing: 8 * dp
+            anchors.margins: -16 * dp
+
+            FlatButton {
+                id: likeButton
+                inline: true
+                text: post.starredNum > 0 ? ("+" + post.starredNum) : "+1"
+                textColor: post.starred ? "#5d4037" : "#de000000"
+            }
+
+            FlatButton {
+                id: commentButton
+                inline: true
+                text: post.commentNum > 0 ? ("留言(%d)".replace("%d", post.commentNum)) : "留言"
+            }
         }
     }
 }

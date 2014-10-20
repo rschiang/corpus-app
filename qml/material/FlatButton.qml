@@ -2,10 +2,12 @@ import QtQuick 2.0
 
 Item {
     id: root
-    width: Math.max(88 * dp, label.paintedWidth + 32 * dp)
+    width: (inline || label.paintedWidth > 56 * dp) ? (label.paintedWidth + 32 * dp) : (88 * dp)
     height: 36 * dp
 
+    property bool inline: false
     property alias text: label.text
+    property alias textColor: label.color
 
     signal clicked
 
@@ -13,14 +15,8 @@ Item {
         id: background
         anchors.fill: parent
         radius: 3 * dp
-        color: root.enabled ? "white" : "#eaeaea"
+        color: root.enabled ? "#00999999" : "#1a999999"
         visible: false
-    }
-
-    PaperShadow {
-        id: shadow
-        source: background
-        depth: root.enabled ? (mouseArea.pressed ? 3 : 1) : 0
     }
 
     Text {
