@@ -6,6 +6,7 @@ Item {
     height: 56 * dp
 
     property alias color: background.color
+    property alias rippleColor: ripple.color
     property alias iconSource: icon.source
 
     signal clicked

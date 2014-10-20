@@ -12,6 +12,20 @@ Item {
         raised: posts.contentY > height
         z: 2
 
+        MouseArea {
+            anchors.fill: parent
+            onClicked: scrollToTopAnimation.start()
+        }
+
+        IconButton {
+            id: menuButton
+            anchors.left: parent.left
+            anchors.leftMargin: 16 * dp
+            anchors.verticalCenter: parent.verticalCenter
+
+            iconSource: "qrc:/assets/icon_menu"
+        }
+
         IconButton {
             id: refreshButton
             anchors.right: parent.right
@@ -59,6 +73,13 @@ Item {
                 }
             }
         }
+
+        NumberAnimation on contentY {
+            id: scrollToTopAnimation
+            to: 0
+            duration: 300
+            easing.type: Easing.OutCubic
+        }
     }
 
     FloatingActionButton {
@@ -70,6 +91,7 @@ Item {
         }
 
         color: "#795548"
+        rippleColor: "#3e3723"
         iconSource: "qrc:/assets/icon_add"
     }
 
