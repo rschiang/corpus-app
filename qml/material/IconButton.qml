@@ -2,31 +2,22 @@ import QtQuick 2.0
 
 Item {
     id: root
-    width: 56 * dp
-    height: 56 * dp
+    width: 24 * dp
+    height: 24 * dp
 
-    property alias color: background.color
     property alias iconSource: icon.source
 
     signal clicked
 
-    Rectangle {
-        id: background
-        anchors.fill: parent
-        radius: 28 * dp
-        visible: false
-    }
-
-    PaperShadow {
-        id: shadow
-        source: background
-        depth: root.enabled ? (mouseArea.pressed ? 4 : 2) : 0
-    }
-
     PaperRipple {
         id: ripple
-        radius: 28 * dp
-        color: "#deffffff"
+        anchors {
+            fill: undefined
+            centerIn: parent
+        }
+        width: 40 * dp
+        height: 40 * dp
+        radius: 20 * dp
         mouseArea: mouseArea
     }
 

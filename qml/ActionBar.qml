@@ -2,13 +2,15 @@ import QtQuick 2.0
 import "material"
 
 Item {
-    id: actionBar
+    id: root
     width: parent.width
     height: 56 * dp
 
+    property bool raised: false
+
     PaperShadow {
         source: background
-        depth: 1
+        depth: root.raised ? 2 : 1
     }
 
     Rectangle {
@@ -30,6 +32,7 @@ Item {
         x: 72 * dp
         anchors.verticalCenter: parent.verticalCenter
         font.family: platformFont
+        font.bold: Font.DemiBold
         font.pointSize: 20
         color: "white"
         text: "Corpus"
