@@ -3,6 +3,7 @@
         <file>main.qml</file>
         <file>Api.qml</file>
         <file>MainView.qml</file>
+        <file>ActionBar.qml</file>
         <file>PostCard.qml</file>
         <file>material/PaperShadow.qml</file>
         <file>material/PaperRipple.qml</file>

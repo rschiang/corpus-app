@@ -12,7 +12,13 @@ Window {
     property real dp: Math.max(0.5, Screen.pixelDensity * 25.4 / 160)
     property string platformFont: "Roboto"
 
+    ActionBar {
+        id: actionBar
+        z: 2
+    }
+
     MainView {
+        anchors.topMargin: actionBar.height
     }
 
     Api {
