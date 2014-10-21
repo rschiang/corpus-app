@@ -43,7 +43,7 @@ Item {
             top: actionBar.bottom
             left: parent.left
             right: parent.right
-            bottom: parent.bottom
+            bottom: footer.top
         }
 
         topMargin: 8 * dp
@@ -94,6 +94,39 @@ Item {
                     }
                 }
             }
+        }
+    }
+
+    Rectangle {
+        id: footer
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        height: field.height
+        color: "#fafafa"
+
+        TextField {
+            id: field
+            anchors {
+                left: parent.left
+                right: sendButton.left
+                margins: 16 * dp
+            }
+            focusColor: "#795548"
+            hint: "留言⋯⋯"
+        }
+
+        IconButton {
+            id: sendButton
+            anchors {
+                verticalCenter: parent.verticalCenter
+                right: parent.right
+                margins: 16 * dp
+            }
+            iconSource: "qrc:/assets/icon_send-colored"
+            enabled: (field.length > 0)
         }
     }
 

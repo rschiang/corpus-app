@@ -11,6 +11,7 @@
         <file>material/FlatButton.qml</file>
         <file>material/IconButton.qml</file>
         <file>material/FloatingActionButton.qml</file>
+        <file>material/TextField.qml</file>
         <file>material/ActionBar.qml</file>
         <file>material/Card.qml</file>
     </qresource>
@@ -20,5 +21,6 @@
         <file alias="icon_refresh">assets/icon_refresh.svg</file>
         <file alias="icon_back">assets/icon_back.svg</file>
         <file alias="icon_send">assets/icon_send.svg</file>
+        <file alias="icon_send-colored">assets/icon_send-colored.svg</file>
     </qresource>
 </RCC>
