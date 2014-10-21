@@ -127,6 +127,10 @@ Item {
             }
             focusColor: "#795548"
             hint: "留言⋯⋯"
+
+            Keys.onReturnPressed: {
+                if (length > 0) sendButton.clicked()
+            }
         }
 
         IconButton {
@@ -145,6 +149,7 @@ Item {
                     e = JSON.parse(e)
                     comments.model.append(e)
                 })
+                field.text = ""
             }
         }
     }
