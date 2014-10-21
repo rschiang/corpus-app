@@ -3,6 +3,8 @@ import QtQuick 2.0
 Item {
     id: root
 
+    property bool raised: false
+
     signal clicked
 
     Rectangle {
@@ -16,7 +18,7 @@ Item {
     PaperShadow {
         id: shadow
         source: background
-        depth: root.enabled ? (mouseArea.pressed ? 2 : 1) : 0
+        depth: root.enabled ? (root.raised ? 2 : 1) : 0
     }
 
     MouseArea {

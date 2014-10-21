@@ -4,7 +4,7 @@ import QtGraphicalEffects 1.0
 Item {
     id: root
     anchors.fill: parent
-    state: "z-0"
+    state: "z-" + Math.max(0, Math.min(5, depth))
 
     property variant source
     property int depth: 0
@@ -32,37 +32,31 @@ Item {
     states: [
         State {
             name: "z-0"
-            when: depth <= 0
             PropertyChanges { target: topShadow; verticalOffset: 0; radius: 0; color: "#00000000" }
             PropertyChanges { target: bottomShadow; verticalOffset: 0; radius: 0; color: "#00000000" }
         },
         State {
             name: "z-1"
-            when: depth == 1
             PropertyChanges { target: topShadow; verticalOffset: 1 * dp; radius: 1.5 * dp; color: "#1e000000" }
             PropertyChanges { target: bottomShadow; verticalOffset: 1 * dp; radius: 1 * dp; color: "#3d000000" }
         },
         State {
             name: "z-2"
-            when: depth == 2
             PropertyChanges { target: topShadow; verticalOffset: 3 * dp; radius: 3 * dp; color: "#28000000" }
             PropertyChanges { target: bottomShadow; verticalOffset: 3 * dp; radius: 3 * dp; color: "#3a000000" }
         },
         State {
             name: "z-3"
-            when: depth == 3
             PropertyChanges { target: topShadow; verticalOffset: 10 * dp; radius: 10 * dp; color: "#30000000" }
             PropertyChanges { target: bottomShadow; verticalOffset: 6 * dp; radius: 3 * dp; color: "#3a000000" }
         },
         State {
             name: "z-4"
-            when: depth == 4
             PropertyChanges { target: topShadow; verticalOffset: 14 * dp; radius: 14 * dp; color: "#40000000" }
             PropertyChanges { target: bottomShadow; verticalOffset: 10 * dp; radius: 5 * dp; color: "#38000000" }
         },
         State {
             name: "z-5"
-            when: depth >= 5
             PropertyChanges { target: topShadow; verticalOffset: 19 * dp; radius: 19 * dp; color: "#4c000000" }
             PropertyChanges { target: bottomShadow; verticalOffset: 15 * dp; radius: 6 * dp; color: "#38000000" }
         }

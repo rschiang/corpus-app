@@ -22,6 +22,8 @@ Item {
                 id: image
                 width: parent.width
                 height: post.photos ? parent.width * 0.6 : 0
+                sourceSize.width: screenMaxWidth
+                sourceSize.height: screenMaxWidth
                 fillMode: Image.PreserveAspectCrop
                 clip: true
 

@@ -6,7 +6,7 @@ Item {
     anchors.fill: parent
     state: "hidden"
     opacity: 0
-    visible: (state != "hidden")
+    visible: false
 
     property string postId: ""
     property alias post: layout.post
@@ -46,17 +46,15 @@ Item {
 
         topMargin: 8 * dp
         bottomMargin: 8 * dp
+        leftMargin: 8 * dp
+        rightMargin: 8 * dp
 
-        contentWidth: width
+        contentWidth: width - 16 * dp
         contentHeight: card.height
 
         Card {
             id: card
-            anchors {
-                left: parent.left
-                right: parent.right
-                margins: 8 * dp
-            }
+            width: parent.width
             height: column.height
 
             Column {
@@ -72,11 +70,8 @@ Item {
                     model: ListModel {}
                     delegate: Component {
                         Item {
-                            anchors {
-                                left: parent.left
-                                right: parent.right
-                                margins: 16 * dp
-                            }
+                            x: 16 * dp
+                            width: (parent ? parent.width - 32 * dp : 0)
                             height: __text.paintedHeight + 16 * dp
 
                             Text {
@@ -111,11 +106,23 @@ Item {
 
     transitions: [
         Transition {
-            NumberAnimation {
-                target: view
-                properties: "opacity"
-                duration: 280
-                easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+            SequentialAnimation {
+                ScriptAction {
+                    script: if (state != "hidden") view.visible = true
+                }
+                NumberAnimation {
+                    target: view
+                    properties: "opacity"
+                    duration: 280
+                    easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                }
+                ScriptAction {
+                    script: if (state == "hidden") {
+                                view.visible = false
+                                view.post = {}
+                                comments.model.clear()
+                            }
+                }
             }
         }
     ]

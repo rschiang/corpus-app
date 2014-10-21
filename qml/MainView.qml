@@ -57,6 +57,8 @@ Item {
 
         topMargin: 8 * dp
         bottomMargin: 8 * dp
+        leftMargin: 8 * dp
+        rightMargin: 8 * dp
         spacing: 8 * dp
 
         model: ListModel {}
@@ -64,11 +66,7 @@ Item {
         delegate: Component {
             Card {
                 id: __postCard
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: 8 * dp
-                }
+                width: parent.width
                 height: __postCardLayout.height
 
                 PostCardLayout {
