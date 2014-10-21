@@ -28,24 +28,14 @@ Item {
             iconSource: "qrc:/assets/icon_menu"
         }
 
-        IconButton {
+        RefreshButton {
             id: refreshButton
             anchors.right: parent.right
             anchors.rightMargin: 16 * dp
             anchors.verticalCenter: parent.verticalCenter
 
-            iconSource: "qrc:/assets/icon_refresh"
+            loading: view.loading
             onClicked: load()
-
-            SequentialAnimation {
-                running: view.loading
-                loops: Animation.Infinite
-
-                NumberAnimation { target: refreshButton; property: "rotation"; from: 360; to: 180; duration: 200; easing.type: Easing.OutQuad }
-                NumberAnimation { target: refreshButton; property: "rotation"; from: 180; to: 0; duration: 200; easing.type: Easing.InQuad }
-
-                onStopped: refreshButton.rotation = 0
-            }
         }
     }
 

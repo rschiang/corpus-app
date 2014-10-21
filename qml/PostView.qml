@@ -11,6 +11,7 @@ Item {
     property string postId: ""
     property alias post: layout.post
     property int cardY: 0
+    property bool loading: false
 
     Rectangle {
         id: background
@@ -34,6 +35,16 @@ Item {
 
             iconSource: "qrc:/assets/icon_back"
             onClicked: view.hide()
+        }
+
+        RefreshButton {
+            id: refreshButton
+            anchors.right: parent.right
+            anchors.rightMargin: 16 * dp
+            anchors.verticalCenter: parent.verticalCenter
+
+            loading: view.loading
+            onClicked: load()
         }
     }
 
@@ -126,7 +137,15 @@ Item {
                 margins: 16 * dp
             }
             iconSource: "qrc:/assets/icon_send-colored"
+
             enabled: (field.length > 0)
+            onClicked: {
+                api.comment(postId, field.text, function(e) {
+                    console.log(e)
+                    e = JSON.parse(e)
+                    comments.model.append(e)
+                })
+            }
         }
     }
 
@@ -216,13 +235,7 @@ Item {
     ]
 
     onPostIdChanged: {
-        if (postId)
-            api.comments(postId, function(e) {
-                e = JSON.parse(e)
-                comments.model.clear()
-                for (var i in e)
-                    comments.model.append(e[i])
-            })
+        if (postId) load()
     }
 
     Keys.onReleased: {
@@ -230,6 +243,17 @@ Item {
             event.accepted = true
             hide()
         }
+    }
+
+    function load() {
+        view.loading = true
+        api.comments(postId, function(e) {
+            e = JSON.parse(e)
+            comments.model.clear()
+            for (var i in e)
+                comments.model.append(e[i])
+            view.loading = false
+        })
     }
 
     function show() {
