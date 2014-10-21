@@ -11,6 +11,13 @@ Item {
     property string postId: ""
     property alias post: layout.post
 
+
+    Rectangle {
+        id: background
+        anchors.fill: parent
+        color: "#eee"
+    }
+
     ActionBar {
         id: actionBar
         raised: contents.contentY > height
@@ -29,12 +36,6 @@ Item {
         }
     }
 
-    Rectangle {
-        id: background
-        anchors.fill: contents
-        color: "#eee"
-    }
-
     Flickable {
         id: contents
         anchors {
@@ -51,6 +52,7 @@ Item {
 
         contentWidth: width - 16 * dp
         contentHeight: card.height
+        flickableDirection: Flickable.VerticalFlick
 
         Card {
             id: card
@@ -120,6 +122,7 @@ Item {
                     script: if (state == "hidden") {
                                 view.visible = false
                                 view.post = {}
+                                view.postId = ""
                                 comments.model.clear()
                             }
                 }
@@ -128,12 +131,13 @@ Item {
     ]
 
     onPostIdChanged: {
-        api.comments(postId, function(e) {
-            e = JSON.parse(e)
-            comments.model.clear()
-            for (var i in e)
-                comments.model.append(e[i])
-        })
+        if (postId)
+            api.comments(postId, function(e) {
+                e = JSON.parse(e)
+                comments.model.clear()
+                for (var i in e)
+                    comments.model.append(e[i])
+            })
     }
 
     function show() {

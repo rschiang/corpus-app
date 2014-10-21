@@ -66,7 +66,7 @@ Item {
         delegate: Component {
             Card {
                 id: __postCard
-                width: parent.width
+                width: parent.width - 16 * dp
                 height: __postCardLayout.height
 
                 PostCardLayout {
