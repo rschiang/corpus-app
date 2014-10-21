@@ -16,6 +16,7 @@ Item {
         id: background
         anchors.fill: parent
         color: "#eee"
+        opacity: 0
     }
 
     ActionBar {
@@ -53,7 +54,7 @@ Item {
         contentWidth: width - 16 * dp
         contentHeight: card.height
         flickableDirection: Flickable.VerticalFlick
-        interactive: visible && !cardAnimation.running
+        interactive: visible
 
         Card {
             id: card
@@ -99,49 +100,87 @@ Item {
     states: [
         State {
             name: "hidden"
-            PropertyChanges { target: view; opacity: 0 }
         },
         State {
             name: ""
-            PropertyChanges { target: view; opacity: 1 }
         }
     ]
 
     transitions: [
         Transition {
+            to: "hidden"
             SequentialAnimation {
-                ScriptAction {
-                    script: if (state != "hidden") {
-                                view.visible = true
-                                view.focus = true
-                            }
+                ParallelAnimation {
+                    NumberAnimation {
+                        target: contents
+                        property: "contentY"
+                        duration: 280
+                        to: -cardY
+                        easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                    }
+                    NumberAnimation {
+                        target: background
+                        property: "opacity"
+                        to: 0
+                        duration: 280
+                        easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                    }
                 }
                 NumberAnimation {
-                    target: view
-                    properties: "opacity"
+                    targets: [view, contents]
+                    property: "opacity"
+                    to: 0
                     duration: 280
                     easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
                 }
                 ScriptAction {
-                    script: if (state == "hidden") {
-                                view.focus = false
-                                view.visible = false
-                                view.post = {}
-                                view.postId = ""
-                                comments.model.clear()
-                            }
+                    script: {
+                        view.focus = false
+                        view.visible = false
+                        view.post = {}
+                        view.postId = ""
+                        comments.model.clear()
+                    }
+                }
+            }
+        },
+        Transition {
+            to: ""
+            SequentialAnimation {
+                ScriptAction {
+                    script: {
+                        contents.opacity = 0
+                        view.visible = true
+                        view.focus = true
+                    }
+                }
+                NumberAnimation {
+                    target: view
+                    property: "opacity"
+                    to: 1
+                    duration: 280
+                    easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                }
+                ParallelAnimation {
+                    NumberAnimation {
+                        target: contents
+                        property: "contentY"
+                        duration: 280
+                        from: -cardY
+                        to: -contents.topMargin
+                        easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                    }
+                    NumberAnimation {
+                        targets: [background, contents]
+                        property: "opacity"
+                        to: 1
+                        duration: 280
+                        easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                    }
                 }
             }
         }
     ]
-
-    NumberAnimation {
-        id: cardAnimation
-        target: contents
-        properties: "contentY"
-        duration: 280
-        easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
-    }
 
     onPostIdChanged: {
         if (postId)
@@ -161,16 +200,10 @@ Item {
     }
 
     function show() {
-        cardAnimation.from = -cardY
-        cardAnimation.to = -contents.topMargin
-        cardAnimation.start()
         state = ""
     }
 
     function hide() {
-        cardAnimation.from = contents.contentY
-        cardAnimation.to = -cardY
-        cardAnimation.start()
         state = "hidden"
     }
 }
