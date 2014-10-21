@@ -16,7 +16,7 @@ Item {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: scrollToTopAnimation.start()
+            onDoubleClicked: scrollToTopAnimation.start()
         }
 
         IconButton {
@@ -62,14 +62,19 @@ Item {
         model: ListModel {}
 
         delegate: Component {
-            PostCard {
+            Card {
                 id: __postCard
                 anchors {
                     left: parent.left
                     right: parent.right
                     margins: 8 * dp
                 }
-                post: model
+                height: __postCardLayout.height
+
+                PostCardLayout {
+                    id: __postCardLayout
+                    post: model
+                }
             }
         }
 

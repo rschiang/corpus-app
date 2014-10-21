@@ -3,20 +3,21 @@
         <file>main.qml</file>
         <file>Api.qml</file>
         <file>MainView.qml</file>
-        <file>ActionBar.qml</file>
-        <file>PostCard.qml</file>
+        <file>PostCardLayout.qml</file>
         <file>material/PaperShadow.qml</file>
         <file>material/PaperRipple.qml</file>
         <file>material/RaisedButton.qml</file>
         <file>material/FlatButton.qml</file>
         <file>material/IconButton.qml</file>
         <file>material/FloatingActionButton.qml</file>
+        <file>material/ActionBar.qml</file>
         <file>material/Card.qml</file>
     </qresource>
     <qresource prefix="/assets">
+        <file alias="icon_menu">assets/icon_menu.svg</file>
         <file alias="icon_add">assets/icon_add.svg</file>
         <file alias="icon_refresh">assets/icon_refresh.svg</file>
+        <file alias="icon_back">assets/icon_back.svg</file>
         <file alias="icon_send">assets/icon_send.svg</file>
-        <file alias="icon_menu">assets/icon_menu.svg</file>
     </qresource>
 </RCC>

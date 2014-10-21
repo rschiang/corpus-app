@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import "material"
 
-Card {
+Item {
     id: card
     implicitWidth: parent.width
     implicitHeight: layout.height
