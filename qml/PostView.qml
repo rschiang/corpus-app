@@ -109,7 +109,10 @@ Item {
         Transition {
             SequentialAnimation {
                 ScriptAction {
-                    script: if (state != "hidden") view.visible = true
+                    script: if (state != "hidden") {
+                                view.visible = true
+                                view.focus = true
+                            }
                 }
                 NumberAnimation {
                     target: view
@@ -119,6 +122,7 @@ Item {
                 }
                 ScriptAction {
                     script: if (state == "hidden") {
+                                view.focus = false
                                 view.visible = false
                                 view.post = {}
                                 view.postId = ""
@@ -137,6 +141,13 @@ Item {
                 for (var i in e)
                     comments.model.append(e[i])
             })
+    }
+
+    Keys.onReleased: {
+        if (event.key == Qt.Key_Back) {
+            event.accepted = true
+            hide()
+        }
     }
 
     function show() {
