@@ -59,12 +59,18 @@ Item {
 
             Connections {
                 target: mouseArea
-                onReleased: if (!fadeAnimation.running) fadeAnimation.start()
+                onReleased: fadeIfApplicable()
+                onExited: fadeIfApplicable()
             }
 
             Component.onCompleted: {
                 growAnimation.start()
                 if (!(mouseArea.pressed || fadeAnimation.running))
+                    fadeAnimation.start()
+            }
+
+            function fadeIfApplicable() {
+                if (!fadeAnimation.running)
                     fadeAnimation.start()
             }
         }
