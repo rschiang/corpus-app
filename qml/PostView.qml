@@ -11,7 +11,6 @@ Item {
     property string postId: ""
     property alias post: layout.post
 
-
     Rectangle {
         id: background
         anchors.fill: parent
@@ -58,6 +57,7 @@ Item {
             id: card
             width: parent.width
             height: column.height
+            raised: true
 
             Column {
                 id: column
@@ -78,7 +78,6 @@ Item {
 
                             Text {
                                 id: __text
-                                y: 8 * dp
                                 width: parent.width
                                 wrapMode: Text.Wrap
                                 font.family: platformFont
