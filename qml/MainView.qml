@@ -75,6 +75,12 @@ Item {
                     id: __postCardLayout
                     post: model
                 }
+
+                onClicked: {
+                    postView.post = model
+                    postView.postId = model.postId
+                    postView.show()
+                }
             }
         }
 

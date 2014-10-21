@@ -81,6 +81,5 @@ Item {
                 duration: 280
             }
         }
-
     ]
 }

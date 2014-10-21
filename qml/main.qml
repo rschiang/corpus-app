@@ -15,6 +15,10 @@ Window {
     MainView {
     }
 
+    PostView {
+        id: postView
+    }
+
     Api {
         id: api
     }
