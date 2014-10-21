@@ -10,6 +10,7 @@ Item {
 
     property string postId: ""
     property alias post: layout.post
+    property int cardY: 0
 
     Rectangle {
         id: background
@@ -52,6 +53,7 @@ Item {
         contentWidth: width - 16 * dp
         contentHeight: card.height
         flickableDirection: Flickable.VerticalFlick
+        interactive: visible && !cardAnimation.running
 
         Card {
             id: card
@@ -133,6 +135,14 @@ Item {
         }
     ]
 
+    NumberAnimation {
+        id: cardAnimation
+        target: contents
+        properties: "contentY"
+        duration: 280
+        easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+    }
+
     onPostIdChanged: {
         if (postId)
             api.comments(postId, function(e) {
@@ -151,10 +161,16 @@ Item {
     }
 
     function show() {
+        cardAnimation.from = -cardY
+        cardAnimation.to = -contents.topMargin
+        cardAnimation.start()
         state = ""
     }
 
     function hide() {
+        cardAnimation.from = contents.contentY
+        cardAnimation.to = -cardY
+        cardAnimation.start()
         state = "hidden"
     }
 }

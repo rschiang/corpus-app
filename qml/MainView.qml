@@ -61,6 +61,8 @@ Item {
         rightMargin: 8 * dp
         spacing: 8 * dp
 
+        interactive: !postView.visible
+
         model: ListModel {}
 
         delegate: Component {
@@ -77,6 +79,7 @@ Item {
                 onClicked: {
                     postView.post = model
                     postView.postId = model.postId
+                    postView.cardY = __postCard.y - posts.contentY
                     postView.show()
                 }
             }
