@@ -6,6 +6,8 @@ Item {
     width: parent.width
     height: 56 * dp
 
+    property alias color: background.color
+    property alias text: title.text
     property bool raised: false
 
     PaperShadow {
@@ -16,7 +18,7 @@ Item {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: "#00796b"
+        color: "white"
     }
 
     Text {
@@ -27,6 +29,5 @@ Item {
         font.bold: Font.DemiBold
         font.pointSize: 20
         color: "white"
-        text: "Corpus"
     }
 }

@@ -10,6 +10,8 @@ Item {
     ActionBar {
         id: actionBar
         raised: posts.contentY > height
+        color: "#00796b"
+        text: "Corpus"
         z: 2
 
         MouseArea {
@@ -89,7 +91,6 @@ Item {
         }
 
         color: "#795548"
-        rippleColor: "#3e3723"
         iconSource: "qrc:/assets/icon_add"
     }
 

@@ -32,7 +32,7 @@ Item {
 
     MouseArea {
         id: mouseArea
-        anchors.fill: parent
+        anchors.fill: ripple
         enabled: root.enabled
         onClicked: root.clicked()
     }
