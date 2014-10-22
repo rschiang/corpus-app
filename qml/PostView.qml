@@ -94,7 +94,7 @@ Item {
                                 id: __text
                                 width: parent.width
                                 wrapMode: Text.Wrap
-                                font.family: platformFont
+                                font.family: UIConstants.sansFontFamily
                                 font.pointSize: 14
                                 color: "#de000000"
                                 text: model.content ?

@@ -6,6 +6,9 @@
         <file>PostView.qml</file>
         <file>PostCardLayout.qml</file>
         <file>RefreshButton.qml</file>
+        <file>material/qmldir</file>
+        <file>material/Style.qml</file>
+        <file>material/UIConstants.qml</file>
         <file>material/PaperShadow.qml</file>
         <file>material/PaperRipple.qml</file>
         <file>material/RaisedButton.qml</file>
