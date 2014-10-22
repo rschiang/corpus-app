@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
 Item {
-    id: root
+    id: control
     anchors.fill: parent
     state: "z-" + Math.max(0, Math.min(5, depth))
 
@@ -12,7 +12,7 @@ Item {
     DropShadow {
         id: topShadow
         anchors.fill: parent
-        source: root.source
+        source: control.source
         color: "#00000000"
         spread: 0.0
         samples: 32
@@ -22,7 +22,7 @@ Item {
     DropShadow {
         id: bottomShadow
         anchors.fill: parent
-        source: root.source
+        source: control.source
         color: "#00000000"
         spread: 0.0
         samples: 32

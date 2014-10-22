@@ -1,7 +1,8 @@
 import QtQuick 2.0
+import "."
 
 Item {
-    id: root
+    id: control
     width: parent.width
     height: 56 * dp
 
@@ -11,7 +12,7 @@ Item {
 
     PaperShadow {
         source: background
-        depth: root.raised ? 2 : 1
+        depth: control.raised ? 2 : 1
     }
 
     Rectangle {
@@ -24,9 +25,9 @@ Item {
         id: title
         x: 72 * dp
         anchors.verticalCenter: parent.verticalCenter
-        font.family: platformFont
+        font.family: UIConstants.sansFontFamily
         font.bold: Font.DemiBold
-        font.pointSize: 20
+        font.pointSize: UIConstants.titleFontSize
         color: "white"
     }
 }

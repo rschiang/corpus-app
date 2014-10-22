@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
 Item {
-    id: root
+    id: control
     anchors.fill: parent
 
     property alias radius: mask.radius
@@ -35,7 +35,7 @@ Item {
             id: ink
             radius: 0
             opacity: 0.25
-            color: root.color
+            color: control.color
             property int startX
             property int startY
             property int maxRadius: 150

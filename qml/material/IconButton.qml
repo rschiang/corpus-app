@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 Item {
-    id: root
+    id: button
     width: 24 * dp
     height: 24 * dp
 
@@ -33,7 +33,7 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: ripple
-        enabled: root.enabled
-        onClicked: root.clicked()
+        enabled: button.enabled
+        onClicked: button.clicked()
     }
 }

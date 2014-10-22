@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 Item {
-    id: root
+    id: card
 
     property bool raised: false
 
@@ -18,13 +18,13 @@ Item {
     PaperShadow {
         id: shadow
         source: background
-        depth: root.enabled ? (root.raised ? 2 : 1) : 0
+        depth: card.enabled ? (card.raised ? 2 : 1) : 0
     }
 
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        enabled: root.enabled
-        onClicked: root.clicked()
+        enabled: card.enabled
+        onClicked: card.clicked()
     }
 }

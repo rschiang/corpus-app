@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 Item {
-    id: root
+    id: button
     width: 56 * dp
     height: 56 * dp
 
@@ -21,7 +21,7 @@ Item {
     PaperShadow {
         id: shadow
         source: background
-        depth: root.enabled ? (mouseArea.pressed ? 4 : 2) : 0
+        depth: button.enabled ? (mouseArea.pressed ? 4 : 2) : 0
     }
 
     PaperRipple {
@@ -43,7 +43,7 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        enabled: root.enabled
-        onClicked: root.clicked()
+        enabled: button.enabled
+        onClicked: button.clicked()
     }
 }

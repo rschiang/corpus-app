@@ -19,4 +19,7 @@ QtObject {
     readonly property color displayTextColor: "#8a000000"
     readonly property color bodyTextColor: "#de000000"
 
+    readonly property real largeMargin: 16 * dp
+    readonly property real smallMargin: 8 * dp
+
 }

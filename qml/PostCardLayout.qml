@@ -22,8 +22,8 @@ Item {
                 id: image
                 width: parent.width
                 height: post.photos ? parent.width * 0.6 : 0
-                sourceSize.width: screenMaxWidth
-                sourceSize.height: screenMaxWidth
+                sourceSize.width: root.width
+                sourceSize.height: root.width
                 fillMode: Image.PreserveAspectCrop
                 clip: true
 
@@ -45,9 +45,9 @@ Item {
                     margins: 16 * dp
                 }
 
-                font.family: "Roboto Slab"
-                font.pointSize: text.length <= 16 ? 20 : 16
-                color: "#de000000"
+                font.family: UIConstants.serifFontFamily
+                font.pointSize: text.length <= 16 ? UIConstants.titleFontSize : UIConstants.subheadFontSize
+                color: UIConstants.bodyTextColor
                 wrapMode: Text.Wrap
 
                 text: post.description || ""
@@ -89,8 +89,8 @@ Item {
                     right: parent.right
                     margins: 16 * dp
                 }
-                font.family: platformFont
-                font.pointSize: 14
+                font.family: UIConstants.sansFontFamily
+                font.pointSize: UIConstants.bodyFontSize
                 color: "#8a000000"
                 text: post.textTime ? formatTime() : ""
             }

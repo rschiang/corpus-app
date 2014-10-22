@@ -1,7 +1,8 @@
 import QtQuick 2.0
+import "."
 
 Item {
-    id: root
+    id: control
     implicitWidth: input.contentWidth
     implicitHeight: Math.max(input.contentHeight + 32 * dp, 48 * dp)
 
@@ -33,8 +34,8 @@ Item {
             topMargin: 16 * dp
         }
         color: "#de000000"
-        font.family: platformFont
-        font.pointSize: 16
+        font.family: UIConstants.sansFontFamily
+        font.pointSize: UIConstants.subheadFontSize
     }
 
     Rectangle {
@@ -46,7 +47,7 @@ Item {
             bottomMargin: 8 * dp
         }
         height: input.focus ? 2 * dp : 1 * dp
-        color: input.focus ? root.focusColor : "#38999999"
+        color: input.focus ? control.focusColor : "#38999999"
 
         Behavior on color {
             ColorAnimation { duration: 200 }

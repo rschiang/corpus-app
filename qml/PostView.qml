@@ -95,7 +95,7 @@ Item {
                                 width: parent.width
                                 wrapMode: Text.Wrap
                                 font.family: UIConstants.sansFontFamily
-                                font.pointSize: 14
+                                font.pointSize: UIConstants.bodyFontSize
                                 color: "#de000000"
                                 text: model.content ?
                                       "<font color='#00796b'><b>" + model.username + "</b>: </font>" + model.content :

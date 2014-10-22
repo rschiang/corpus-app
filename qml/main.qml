@@ -9,10 +9,6 @@ Window {
     title: "Corpus"
     color: "#eee"
 
-    property real dp: Math.max(0.5, Screen.pixelDensity * 25.4 / 160)
-    property string platformFont: "Roboto"
-    property string screenMaxWidth: Math.max(Screen.width, Screen.height)
-
     MainView {
     }
 

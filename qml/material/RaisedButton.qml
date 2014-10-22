@@ -1,7 +1,8 @@
 import QtQuick 2.0
+import "."
 
 Item {
-    id: root
+    id: button
     width: Math.max(88 * dp, label.paintedWidth + 32 * dp)
     height: 36 * dp
 
@@ -13,24 +14,24 @@ Item {
         id: background
         anchors.fill: parent
         radius: 3 * dp
-        color: root.enabled ? "white" : "#eaeaea"
+        color: button.enabled ? "white" : "#eaeaea"
         visible: false
     }
 
     PaperShadow {
         id: shadow
         source: background
-        depth: root.enabled ? (mouseArea.pressed ? 3 : 1) : 0
+        depth: button.enabled ? (mouseArea.pressed ? 3 : 1) : 0
     }
 
     Text {
         id: label
         anchors.centerIn: parent
-        font.family: platformFont
-        font.pointSize: 14
+        font.family: UIConstants.sansFontFamily
+        font.pointSize: UIConstants.bodyFontSize
         font.bold: Font.DemiBold
         font.capitalization: Font.AllUppercase
-        color: "#de000000"
+        color: UIConstants.bodyTextColor
     }
 
     PaperRipple {
@@ -42,7 +43,7 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        enabled: root.enabled
-        onClicked: root.clicked()
+        enabled: button.enabled
+        onClicked: button.clicked()
     }
 }
