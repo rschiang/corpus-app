@@ -18,6 +18,8 @@
         <file>material/TextField.qml</file>
         <file>material/ActionBar.qml</file>
         <file>material/Card.qml</file>
+        <file>material/Popup.qml</file>
+        <file>material/Dialog.qml</file>
     </qresource>
     <qresource prefix="/assets">
         <file alias="icon_menu">assets/icon_menu.svg</file>
