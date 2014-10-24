@@ -16,6 +16,10 @@ Window {
         id: postView
     }
 
+    PostDialog {
+        id: postDialog
+    }
+
     Api {
         id: api
     }

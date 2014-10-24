@@ -94,6 +94,8 @@ Item {
 
         color: "#795548"
         iconSource: "qrc:/assets/icon_add"
+
+        onClicked: postDialog.open()
     }
 
     function load() {

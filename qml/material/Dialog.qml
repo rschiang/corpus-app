@@ -32,8 +32,4 @@ Popup {
             id: layout
         }
     }
-
-    onBackgroundClicked: {
-        popup.close()   // TODO: Reject
-    }
 }
