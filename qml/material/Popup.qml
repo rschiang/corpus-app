@@ -9,7 +9,10 @@ Rectangle {
     state: "hidden"
 
     property bool dim: true
+    property bool active: (state == "visible")
 
+    signal opening
+    signal closing
     signal backgroundClicked
 
     MouseArea {
@@ -46,4 +49,18 @@ Rectangle {
             }
         }
     ]
+
+    function open() {
+        if (state == "hidden") {
+            state = "visible"
+            opening()
+        }
+    }
+
+    function close() {
+        if (state == "visible") {
+            state = "hidden"
+            closing()
+        }
+    }
 }
