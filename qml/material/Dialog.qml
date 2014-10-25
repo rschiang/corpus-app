@@ -11,8 +11,9 @@ Popup {
     Item {
         id: dialog
         anchors.centerIn: parent
-        implicitWidth: Math.min(layout.implicitWidth, parent.width - 80 * dp)
+        implicitWidth: parent.width - 80 * dp
         implicitHeight: layout.height
+        state: popup.state
 
         PaperShadow {
             id: shadow
@@ -30,6 +31,41 @@ Popup {
 
         Column {
             id: layout
+            width: parent.width
         }
+
+        states: [
+            State {
+                name: "visible"
+                PropertyChanges { target: dialog; opacity: 1 }
+            },
+            State {
+                name: "hidden"
+                PropertyChanges { target: dialog; opacity: 0 }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                NumberAnimation {
+                    target: dialog
+                    property: "opacity"
+                    duration: 200
+                    easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                }
+            },
+            Transition {
+                from: "hidden"
+                to: "visible"
+                NumberAnimation {
+                    target: dialog
+                    property: "scale"
+                    from: 0.9
+                    to: 1
+                    duration: 200
+                    easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                }
+            }
+        ]
     }
 }
