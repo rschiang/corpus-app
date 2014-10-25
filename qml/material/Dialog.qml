@@ -32,6 +32,7 @@ Popup {
         MouseArea {
             id: eventEater
             anchors.fill: parent
+            enabled: (state == "visible")
         }
 
         Column {

@@ -103,7 +103,24 @@ Item {
                             }
                         }
                     }
+
                 }
+            }
+
+            Behavior on height {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                }
+            }
+
+            NumberAnimation {
+                id: loadedAnimation
+                target: column
+                property: "opacity"
+                from: 0; to: 1
+                duration: 200
+                easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
             }
         }
     }
@@ -145,7 +162,6 @@ Item {
             enabled: (field.length > 0)
             onClicked: {
                 api.comment(postId, field.text, function(e) {
-                    console.log(e)
                     e = JSON.parse(e)
                     comments.model.append(e)
                 })
@@ -258,6 +274,7 @@ Item {
             for (var i in e)
                 comments.model.append(e[i])
             view.loading = false
+            loadedAnimation.start()
         })
     }
 
