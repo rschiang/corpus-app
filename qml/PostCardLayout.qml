@@ -90,6 +90,7 @@ Item {
                 Image {
                     anchors {
                         right: commentsLabel.left
+                        rightMargin: 3 * dp
                         verticalCenter: parent.verticalCenter
                     }
                     width: 24 * dp
