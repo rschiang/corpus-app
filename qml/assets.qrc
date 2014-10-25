@@ -3,6 +3,7 @@
         <file>main.qml</file>
         <file>Api.qml</file>
         <file>MainView.qml</file>
+        <file>PostLoader.js</file>
         <file>PostView.qml</file>
         <file>PostCardLayout.qml</file>
         <file>RefreshButton.qml</file>

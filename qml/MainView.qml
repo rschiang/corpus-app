@@ -108,14 +108,18 @@ Item {
         onClicked: postDialog.open()
     }
 
+    WorkerScript {
+        id: loader
+        source: "PostLoader.js"
+        onMessage: {
+            view.loading = false
+        }
+    }
+
     function load() {
         view.loading = true
         api.posts(function(e) {
-            e = JSON.parse(e)
-            posts.model.clear()
-            for (var i in e)
-                posts.model.append(e[i])
-            view.loading = false
+            loader.sendMessage({ src: e, model: posts.model })
         })
     }
 
