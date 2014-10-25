@@ -69,6 +69,13 @@ Item {
                 inline: true
                 text: post.starredNum > 0 ? ("+" + post.starredNum) : "+1"
                 textColor: post.starred ? "#5d4037" : "#de000000"
+                onClicked: {
+                    var p = post
+                    p.starred = !p.starred
+                    p.starredNum += p.starred ? 1 : -1
+                    post = p
+                    api.star(p.postId, function(e) {})
+                }
             }
 
             FlatButton {
