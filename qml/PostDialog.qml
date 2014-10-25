@@ -54,7 +54,6 @@ Dialog {
                 fill: parent
                 leftMargin: 16 * dp
                 rightMargin: 16 * dp
-                bottomMargin: 16 * dp
             }
 
             IconButton {
@@ -79,12 +78,14 @@ Dialog {
             FlatButton {
                 id: sendButton
                 anchors {
+                    top: parent.top
+                    bottom: parent.bottom
                     right: parent.right
-                    verticalCenter: parent.verticalCenter
+                    rightMargin: -16 * dp
                 }
-                text: "Send"
+                text: "傳送"
                 textColor: "#795548"
-                enabled: (field.length > 0)
+                enabled: (field.length >= 12)
                 onClicked: {
                     api.submitPost(field.text, {latitude: 25.02, longitude: 121.54}, function(e) {
                         mainView.load()

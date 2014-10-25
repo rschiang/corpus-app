@@ -28,6 +28,14 @@ Item {
         height: 24 * dp
         sourceSize.width: width
         sourceSize.height: height
+        opacity: button.enabled ? 1 : 0.62
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+            }
+        }
     }
 
     MouseArea {
