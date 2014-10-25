@@ -7,6 +7,7 @@ Item {
         margins: -1
     }
     state: "hidden"
+    visible: (background.opacity > 0)
 
     property bool dim: true
     property bool active: (state == "visible")

@@ -31,6 +31,7 @@ Item {
             top: parent.top
             left: parent.left
             right: parent.right
+            bottom: divider.top
             topMargin: 16 * dp
         }
         color: "#de000000"
