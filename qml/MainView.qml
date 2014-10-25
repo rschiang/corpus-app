@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import "material"
+import "Cache.js" as Cache
 
 Item {
     id: view
@@ -63,11 +64,10 @@ Item {
 
                 PostCardLayout {
                     id: __postCardLayout
-                    post: model
+                    postId: model.postId
                 }
 
                 onClicked: {
-                    postView.post = model
                     postView.postId = model.postId
                     postView.cardY = __postCard.y - posts.contentY
                     postView.show()
@@ -112,7 +112,12 @@ Item {
         id: loader
         source: "PostLoader.js"
         onMessage: {
-            view.loading = false
+            if (messageObject.done) {
+                view.loading = false
+            }
+            else if (messageObject.posts) {
+                Cache.posts = messageObject.posts
+            }
         }
     }
 

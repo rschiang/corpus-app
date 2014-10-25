@@ -9,6 +9,7 @@ SOURCES += src/main.cpp
 RESOURCES += qml/assets.qrc
 
 OTHER_FILES += qml/*.qml \
+    qml/*.js \
     qml/material/*.qml \
     platform/android/AndroidManifest.xml
 

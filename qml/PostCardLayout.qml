@@ -1,12 +1,13 @@
 import QtQuick 2.0
 import "material"
+import "Cache.js" as Cache
 
 Item {
     id: card
     implicitWidth: parent.width
     implicitHeight: layout.height
 
-    property variant post: ({})
+    property string postId
 
     Column {
         id: layout
@@ -21,14 +22,12 @@ Item {
             Image {
                 id: image
                 width: parent.width
-                height: post.photos ? parent.width * 0.6 : 0
+                height: 0
                 sourceSize.width: root.width
                 sourceSize.height: root.width
                 fillMode: Image.PreserveAspectCrop
                 clip: true
-
                 asynchronous: true
-                source: post.photos ? api.photo(post.photos) : ""
             }
         }
 
@@ -49,8 +48,6 @@ Item {
                 font.pointSize: text.length <= 16 ? UIConstants.titleFontSize : UIConstants.subheadFontSize
                 color: UIConstants.bodyTextColor
                 wrapMode: Text.Wrap
-
-                text: post.description || ""
             }
         }
 
@@ -67,14 +64,15 @@ Item {
                 }
 
                 inline: true
-                text: post.starredNum > 0 ? ("+" + post.starredNum) : "+1"
-                textColor: post.starred ? "#5d4037" : "#de000000"
+                text: "+1"
+                textColor: "#de000000"
                 onClicked: {
-                    var p = post
-                    p.starred = !p.starred
-                    p.starredNum += p.starred ? 1 : -1
-                    post = p
-                    api.star(p.postId, function(e) {})
+                    var post = Cache.getPost(postId)
+                    post.starred = !post.starred
+                    post.starredNum = parseInt(post.starredNum) + (post.starred ? 1 : -1)
+                    card.reload()
+
+                    api.star(post.postId, function(e) {})
                 }
             }
 
@@ -87,10 +85,11 @@ Item {
                 }
 
                 inline: true
-                text: post.commentNum > 0 ? ("留言(%d)".replace("%d", post.commentNum)) : "留言"
+                text: "留言"
             }
 
             Text {
+                id: timestamp
                 anchors {
                     verticalCenter: parent.verticalCenter
                     right: parent.right
@@ -99,16 +98,33 @@ Item {
                 font.family: UIConstants.sansFontFamily
                 font.pointSize: UIConstants.bodyFontSize
                 color: "#8a000000"
-                text: post.textTime ? formatTime() : ""
+                text: ""
             }
         }
     }
 
-    function formatTime() {
-        var formats = {"_Second_": "%d 秒前", "_Minute_": "%d 分鐘前", "_Hour_": "%d 小時前", "_Yesterday_": "昨天"}
-        if (post.textTime.unit in formats)
-            return formats[post.textTime.unit].replace("%d", post.textTime.num)
-        else
-            return post.textTime.num
+    function reload() {
+        if (!Cache.containsPost(postId))
+            return
+
+        var post = Cache.getPost(postId)
+        image.source = post.photos ? api.photo(post.photos) : ""
+        image.height = post.photos ? parent.width * 0.6 : 0
+        article.text = post.description ? post.description.trim() : ""
+        likeButton.text = post.starredNum > 0 ? ("+" + post.starredNum) : "+1"
+        likeButton.textColor = post.starred ? "#795548" : "#de000000"
+        commentButton.text = post.commentNum > 0 ? ("留言(%d)".replace("%d", post.commentNum)) : "留言"
+
+        if (post.textTime) {
+            var formats = {"_Second_": "%d 秒前", "_Minute_": "%d 分鐘前", "_Hour_": "%d 小時前", "_Yesterday_": "昨天"}
+            if (post.textTime.unit in formats)
+                timestamp.text = formats[post.textTime.unit].replace("%d", post.textTime.num)
+            else
+                timestamp.text = post.textTime.num
+        } else {
+            timestamp.text = ""
+        }
     }
+
+    onPostIdChanged: reload()
 }

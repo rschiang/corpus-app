@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Api.qml</file>
+        <file>Cache.js</file>
         <file>MainView.qml</file>
         <file>PostLoader.js</file>
         <file>PostView.qml</file>

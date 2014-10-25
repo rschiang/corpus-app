@@ -8,8 +8,7 @@ Item {
     opacity: 0
     visible: false
 
-    property string postId: ""
-    property alias post: layout.post
+    property string postId
     property int cardY: 0
     property bool loading: false
 
@@ -81,6 +80,7 @@ Item {
 
                 PostCardLayout {
                     id: layout
+                    postId: view.postId
                 }
 
                 Repeater {
@@ -163,7 +163,7 @@ Item {
 
             enabled: (field.length > 0)
             onClicked: {
-                api.comment(postId, field.text, function(e) {
+                api.comment(view.postId, field.text, function(e) {
                     e = JSON.parse(e)
                     comments.model.append(e)
                 })
@@ -215,7 +215,6 @@ Item {
                     script: {
                         view.focus = false
                         view.visible = false
-                        view.post = {}
                         view.postId = ""
                     }
                 }

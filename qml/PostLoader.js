@@ -1,8 +1,15 @@
 WorkerScript.onMessage = function(params) {
-    var e = JSON.parse(params.src)
+    var entries = JSON.parse(params.src)
+    var posts = {}
+
     params.model.clear()
-    for (var i in e)
-        params.model.append(e[i])
-    WorkerScript.sendMessage({ done: true })
+    for (var i in entries) {
+        var entry = entries[i]
+        posts[entry.postId] = entry
+        params.model.append({ postId: entry.postId })
+    }
+
+    WorkerScript.sendMessage({ posts: posts })
     params.model.sync()
+    WorkerScript.sendMessage({ done: true })
 }
