@@ -73,19 +73,44 @@ Item {
                     card.reload()
 
                     api.star(post.postId, function(e) {})
+                    console.log(width)
                 }
             }
 
-            FlatButton {
-                id: commentButton
+            Item {
+                id: comments
                 anchors {
                     verticalCenter: parent.verticalCenter
                     left: likeButton.right
                     margins: 8 * dp
                 }
+                width: 70 * dp
+                height: 36 * dp
 
-                inline: true
-                text: "留言"
+                Image {
+                    anchors {
+                        right: commentsLabel.left
+                        verticalCenter: parent.verticalCenter
+                    }
+                    width: 24 * dp
+                    height: 24 * dp
+                    sourceSize.width: width
+                    sourceSize.height: height
+                    source: "qrc:/assets/icon_comment"
+                }
+
+                Text {
+                    id: commentsLabel
+                    anchors {
+                        centerIn: parent
+                        horizontalCenterOffset: -15 * dp
+                    }
+                    font.family: UIConstants.sansFontFamily
+                    font.pointSize: UIConstants.bodyFontSize
+                    font.bold: Font.DemiBold
+                    font.capitalization: Font.AllUppercase
+                    color: UIConstants.bodyTextColor
+                }
             }
 
             Text {
@@ -113,7 +138,8 @@ Item {
         article.text = post.description ? post.description.trim() : ""
         likeButton.text = post.starredNum > 0 ? ("+" + post.starredNum) : "+1"
         likeButton.textColor = post.starred ? "#795548" : "#de000000"
-        commentButton.text = post.commentNum > 0 ? ("留言(%d)".replace("%d", post.commentNum)) : "留言"
+        comments.opacity = post.commentNum > 0 ? 1 : 0.62
+        commentsLabel.text = post.commentNum > 0 ? post.commentNum : ""
 
         if (post.textTime) {
             var formats = {"_Second_": "%d 秒前", "_Minute_": "%d 分鐘前", "_Hour_": "%d 小時前", "_Yesterday_": "昨天"}
