@@ -7,12 +7,19 @@ Dialog {
     TextEdit {
         id: field
         width: parent.width
-        height: Math.min(168 * dp, root.height - 80 * dp) - 52 * dp
+        height: Math.min(Math.max(field.implicitHeight, 168 * dp), root.height - 132 * dp)
         textMargin: 24 * dp
 
         color: "#de000000"
         font.family: UIConstants.sansFontFamily
         font.pointSize: UIConstants.subheadFontSize
+
+        Behavior on height {
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+            }
+        }
     }
 
     Item {

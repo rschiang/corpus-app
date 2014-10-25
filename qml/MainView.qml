@@ -91,6 +91,16 @@ Item {
             bottom: parent.bottom
             margins: 16 * dp
         }
+        transform: Translate {
+            y: postView.visible ? 72 * dp : 0
+
+            Behavior on y {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                }
+            }
+        }
 
         color: "#795548"
         iconSource: "qrc:/assets/icon_add"

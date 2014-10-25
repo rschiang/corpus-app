@@ -18,13 +18,13 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        enabled: (background.opacity > 0)
+        enabled: (state == "visible")
     }
 
     Rectangle {
         id: background
         anchors.fill: parent
-        color: popup.dim ? "#aa000000" : "transparent"
+        color: popup.dim ? "#55000000" : "transparent"
         opacity: 0
     }
 

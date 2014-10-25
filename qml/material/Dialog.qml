@@ -60,10 +60,10 @@ Popup {
                 NumberAnimation {
                     target: dialog
                     property: "scale"
-                    from: 0.9
+                    from: 0.95
                     to: 1
                     duration: 200
-                    easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                    easing.type: Easing.OutCubic
                 }
             }
         ]
