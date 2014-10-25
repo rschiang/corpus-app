@@ -85,7 +85,12 @@ Dialog {
                 text: "Send"
                 textColor: "#795548"
                 enabled: (field.length > 0)
-                onClicked: dialog.close()
+                onClicked: {
+                    api.submitPost(field.text, {latitude: 25.02, longitude: 121.54}, function(e) {
+                        mainView.load()
+                    })
+                    dialog.close()
+                }
             }
         }
     }

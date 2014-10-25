@@ -10,6 +10,7 @@ Window {
     color: "#eee"
 
     MainView {
+        id: mainView
     }
 
     PostView {
