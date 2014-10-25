@@ -29,6 +29,11 @@ Popup {
             visible: false
         }
 
+        MouseArea {
+            id: eventEater
+            anchors.fill: parent
+        }
+
         Column {
             id: layout
             width: parent.width

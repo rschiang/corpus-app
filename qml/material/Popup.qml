@@ -18,7 +18,12 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        enabled: (state == "visible")
+        enabled: (popup.state == "visible")
+        onClicked: {
+            // Eats the event, and up to desendants to decide whether to close the dialog
+            mouse.accepted = true
+            backgroundClicked()
+        }
     }
 
     Rectangle {
