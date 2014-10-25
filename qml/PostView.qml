@@ -67,6 +67,8 @@ Item {
         flickableDirection: Flickable.VerticalFlick
         interactive: visible
 
+        transform: Translate { id: contentTransform }
+
         Card {
             id: card
             width: parent.width
@@ -183,12 +185,15 @@ Item {
         Transition {
             to: "hidden"
             SequentialAnimation {
+                ScriptAction {
+                    script: comments.model.clear()
+                }
                 ParallelAnimation {
                     NumberAnimation {
-                        target: contents
-                        property: "contentY"
+                        target: contentTransform
+                        property: "y"
                         duration: 280
-                        to: -cardY
+                        to: (cardY + contents.contentY - contents.topMargin)
                         easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
                     }
                     NumberAnimation {
@@ -212,7 +217,6 @@ Item {
                         view.visible = false
                         view.post = {}
                         view.postId = ""
-                        comments.model.clear()
                     }
                 }
             }
@@ -236,11 +240,11 @@ Item {
                 }
                 ParallelAnimation {
                     NumberAnimation {
-                        target: contents
-                        property: "contentY"
+                        target: contentTransform
+                        property: "y"
                         duration: 280
-                        from: -cardY
-                        to: -contents.topMargin
+                        from: (cardY - contents.topMargin)
+                        to: 0
                         easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
                     }
                     NumberAnimation {

@@ -61,6 +61,7 @@ Item {
                 target: mouseArea
                 onReleased: fadeIfApplicable()
                 onExited: fadeIfApplicable()
+                onCanceled: fadeIfApplicable()
             }
 
             Component.onCompleted: {
