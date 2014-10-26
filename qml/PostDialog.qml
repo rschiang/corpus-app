@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtPositioning 5.2
 import "material"
 
 Dialog {
@@ -72,7 +73,16 @@ Dialog {
                     leftMargin: 16 * dp
                     verticalCenter: parent.verticalCenter
                 }
-                iconSource: "qrc:/assets/icon_location"
+                iconSource: position.active ? "qrc:/assets/icon_location-colored" : "qrc:/assets/icon_location"
+                enabled: position.supportedPositioningMethods != PositionSource.NoPositioningMethods
+                onClicked: position.active = !position.active
+
+                PositionSource {
+                    id: position
+                    active: false
+                    updateInterval: 2000
+                    preferredPositioningMethods: PositionSource.SatellitePositioningMethods
+                }
             }
 
             FlatButton {
@@ -86,12 +96,7 @@ Dialog {
                 text: "傳送"
                 textColor: "#795548"
                 enabled: (field.length >= 12)
-                onClicked: {
-                    api.submitPost(field.text, {latitude: 25.02, longitude: 121.54}, function(e) {
-                        mainView.load()
-                    })
-                    dialog.close()
-                }
+                onClicked: send()
             }
         }
     }
@@ -103,9 +108,24 @@ Dialog {
     onClosing: {
         field.focus = false
         field.text = ""
+        if (position.active)
+            position.stop()
     }
 
     onBackgroundClicked: {
+        dialog.close()
+    }
+
+    function send() {
+        var coordinate = {latitude: 25.02, longitude: 121.54}
+        if (position.active && position.valid) {
+            coordinate.latitude = position.position.coordinate.latitude
+            coordinate.longitude = position.position.coordinate.longitude
+        }
+
+        api.submitPost(field.text, coordinate, function(e) {
+            mainView.load()
+        })
         dialog.close()
     }
 }

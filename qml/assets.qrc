@@ -33,6 +33,7 @@
         <file alias="icon_send-colored">assets/icon_send-colored.svg</file>
         <file alias="icon_camera">assets/icon_camera.svg</file>
         <file alias="icon_location">assets/icon_location.svg</file>
+        <file alias="icon_location-colored">assets/icon_location-colored.svg</file>
         <file alias="icon_comment">assets/icon_comment.svg</file>
     </qresource>
 </RCC>
