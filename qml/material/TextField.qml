@@ -20,7 +20,7 @@ Item {
     Text {
         id: placeholder
         anchors.fill: input
-        visible: !input.length
+        visible: !field.length && !field.inputMethodComposing
         color: "#8a999999"
         font: input.font
     }

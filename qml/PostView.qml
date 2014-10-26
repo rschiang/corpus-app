@@ -193,7 +193,7 @@ Item {
                         target: contentTransform
                         property: "y"
                         duration: 280
-                        to: (cardY + contents.contentY - contents.topMargin)
+                        to: (cardY + contents.contentY)
                         easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
                     }
                     NumberAnimation {

@@ -25,7 +25,7 @@ Dialog {
                 fill: parent
                 margins: field.textMargin
             }
-            visible: !field.length
+            visible: !field.length && !field.inputMethodComposing
             color: "#8a999999"
             font: field.font
             text: "周圍有什麼新鮮事？"
