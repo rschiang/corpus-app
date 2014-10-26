@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtPositioning 5.2
 import "material"
+import "Cache.js" as Cache
 
 Dialog {
     id: dialog
@@ -82,6 +83,7 @@ Dialog {
                     active: false
                     updateInterval: 2000
                     preferredPositioningMethods: PositionSource.SatellitePositioningMethods
+                    onPositionChanged: Cache.updateLocation(position.position)
                 }
             }
 
@@ -119,8 +121,9 @@ Dialog {
     function send() {
         var coordinate = {latitude: 25.02, longitude: 121.54}
         if (position.active && position.valid) {
-            coordinate.latitude = position.position.coordinate.latitude
-            coordinate.longitude = position.position.coordinate.longitude
+            var pos = Cache.findBestLocation() || position.position
+            coordinate.latitude = pos.latitude
+            coordinate.longitude = pos.longitude
         }
 
         api.submitPost(field.text, coordinate, function(e) {
