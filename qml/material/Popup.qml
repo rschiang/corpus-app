@@ -7,7 +7,7 @@ Item {
         margins: -1
     }
     state: "hidden"
-    visible: (background.opacity > 0)
+    visible: false
 
     property bool dim: true
     property bool active: (state == "visible")
@@ -47,11 +47,27 @@ Item {
 
     transitions: [
         Transition {
-            NumberAnimation {
-                target: background
-                property: "opacity"
-                duration: 200
-                easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+            from: "hidden"; to: "visible"
+            SequentialAnimation {
+                PropertyAction { target: popup; property: "visible"; value: true }
+                NumberAnimation {
+                    target: background
+                    property: "opacity"
+                    duration: 200
+                    easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                }
+            }
+        },
+        Transition {
+            from: "visible"; to: "hidden"
+            SequentialAnimation {
+                NumberAnimation {
+                    target: background
+                    property: "opacity"
+                    duration: 200
+                    easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                }
+                PropertyAction { target: popup; property: "visible"; value: false }
             }
         }
     ]
