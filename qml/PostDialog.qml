@@ -74,13 +74,16 @@ Dialog {
                     leftMargin: 16 * dp
                     verticalCenter: parent.verticalCenter
                 }
-                iconSource: position.active ? "qrc:/assets/icon_location-colored" : "qrc:/assets/icon_location"
+
+                property bool active: true
+
+                iconSource: (enabled && active) ? "qrc:/assets/icon_location-colored" : "qrc:/assets/icon_location"
                 enabled: position.supportedPositioningMethods != PositionSource.NoPositioningMethods
-                onClicked: position.active = !position.active
+                onClicked: active = !active
 
                 PositionSource {
                     id: position
-                    active: false
+                    active: dialog.active && Qt.application.state == Qt.ApplicationActive
                     updateInterval: 2000
                     preferredPositioningMethods: PositionSource.SatellitePositioningMethods
                     onPositionChanged: Cache.updateLocation(position.position)
@@ -120,10 +123,14 @@ Dialog {
 
     function send() {
         var coordinate = {latitude: 25.02, longitude: 121.54}
-        if (position.active && position.valid) {
-            var pos = Cache.findBestLocation() || position.position
-            coordinate.latitude = pos.latitude
-            coordinate.longitude = pos.longitude
+        if (locationButton.active) {
+            var pos = Cache.findBestLocation()
+            if (pos)
+                coordinate = pos
+            else if (position.valid) {
+                coordinate.latitude = position.position.latitude
+                coordinate.longitude = position.position.longitude
+            }
         }
 
         api.submitPost(field.text, coordinate, function(e) {
