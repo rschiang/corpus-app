@@ -5,6 +5,7 @@ import "Cache.js" as Cache
 Item {
     id: view
     anchors.fill: parent
+    state: "visible"
 
     property bool loading: false
 
@@ -108,6 +109,31 @@ Item {
 
         onClicked: postDialog.open()
     }
+
+    states: [
+        State {
+            name: "hidden"
+            PropertyChanges { target: posts; opacity: 0 }
+        },
+        State {
+            name: "visible"
+            PropertyChanges { target: posts; opacity: 1 }
+        }
+    ]
+
+    transitions: [
+        Transition {
+            SequentialAnimation {
+                PauseAnimation { duration: 200 }
+                NumberAnimation {
+                    target: posts
+                    property: "opacity"
+                    duration: 280
+                    easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                }
+            }
+        }
+    ]
 
     WorkerScript {
         id: loader

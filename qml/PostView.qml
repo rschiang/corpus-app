@@ -12,11 +12,10 @@ Item {
     property int cardY: 0
     property bool loading: false
 
-    Rectangle {
-        id: background
+    MouseArea {
+        id: eventEater
         anchors.fill: parent
-        color: "#eee"
-        opacity: 0
+        enabled: (state == "visible")
     }
 
     ActionBar {
@@ -64,7 +63,7 @@ Item {
         contentWidth: width - 16 * dp
         contentHeight: card.height
         flickableDirection: Flickable.VerticalFlick
-        interactive: visible
+        interactive: view.visible
 
         transform: Translate { id: contentTransform }
 
@@ -118,7 +117,7 @@ Item {
 
             NumberAnimation {
                 id: loadedAnimation
-                target: column
+                target: comments
                 property: "opacity"
                 from: 0; to: 1
                 duration: 200
@@ -175,9 +174,11 @@ Item {
     states: [
         State {
             name: "hidden"
+            PropertyChanges { target: view; focus: false }
         },
         State {
-            name: ""
+            name: "visible"
+            PropertyChanges { target: view; focus: true }
         }
     ]
 
@@ -185,35 +186,27 @@ Item {
         Transition {
             to: "hidden"
             SequentialAnimation {
-                ScriptAction {
-                    script: comments.model.clear()
-                }
                 ParallelAnimation {
+                    ScriptAction {
+                        script: comments.model.clear()
+                    }
                     NumberAnimation {
                         target: contentTransform
                         property: "y"
                         duration: 280
-                        to: (cardY + contents.contentY)
-                        easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
-                    }
-                    NumberAnimation {
-                        target: background
-                        property: "opacity"
-                        to: 0
-                        duration: 280
+                        from: 0; to: (cardY + contents.contentY)
                         easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
                     }
                 }
                 NumberAnimation {
-                    targets: [view, contents]
+                    target: view
                     property: "opacity"
                     to: 0
-                    duration: 280
+                    duration: 200
                     easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
                 }
                 ScriptAction {
                     script: {
-                        view.focus = false
                         view.visible = false
                         view.postId = ""
                     }
@@ -221,39 +214,21 @@ Item {
             }
         },
         Transition {
-            to: ""
-            SequentialAnimation {
-                ScriptAction {
-                    script: {
-                        contents.opacity = 0
-                        view.visible = true
-                        view.focus = true
-                    }
-                }
-                NumberAnimation {
-                    target: view
-                    property: "opacity"
-                    to: 1
-                    duration: 280
-                    easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
-                }
-                ParallelAnimation {
-                    NumberAnimation {
-                        target: contentTransform
-                        property: "y"
-                        duration: 280
-                        from: (cardY - contents.topMargin)
-                        to: 0
-                        easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
-                    }
-                    NumberAnimation {
-                        targets: [background, contents]
-                        property: "opacity"
-                        to: 1
-                        duration: 280
-                        easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
-                    }
-                }
+            to: "visible"
+            NumberAnimation {
+                target: view
+                property: "opacity"
+                to: 1
+                duration: 200
+                easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+            }
+            NumberAnimation {
+                target: contentTransform
+                property: "y"
+                duration: 280
+                from: (cardY - contents.topMargin)
+                to: 0
+                easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
             }
         }
     ]
@@ -282,10 +257,13 @@ Item {
     }
 
     function show() {
-        state = ""
+        view.visible = true
+        state = "visible"
+        mainView.state = "hidden"
     }
 
     function hide() {
         state = "hidden"
+        mainView.state = "visible"
     }
 }
