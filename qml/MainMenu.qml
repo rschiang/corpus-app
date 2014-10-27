@@ -10,6 +10,16 @@ Menu {
         fillMode: Image.PreserveAspectFit
         source: "qrc:/assets/intro"
 
+        IconButton {
+            id: backButton
+            x: 16 * dp
+            y: 16 * dp
+
+            rippleColor: "#deffffff"
+            iconSource: "qrc:/assets/icon_back"
+            onClicked: menu.close()
+        }
+
         Text {
             anchors {
                 left: parent.left
@@ -18,7 +28,7 @@ Menu {
                 margins: 16 * dp
             }
             font.family: UIConstants.sansFontFamily
-            font.pointSize: UIConstants.titleFontSize
+            font.pointSize: UIConstants.headlineFontSize
             color: "white"
             text: "Corpus"
         }
