@@ -87,7 +87,7 @@ Item {
                     leftMargin: 16 * dp
                     rightMargin: 16 * dp
                 }
-                height: (comments.count > 0) ? (childrenRect.height + 16 * dp) : 0
+                height: (comments.count > 0) ? (implicitHeight + 16 * dp) : 0
                 spacing: 16 * dp
 
                 Repeater {
@@ -135,7 +135,7 @@ Item {
             bottom: parent.bottom
         }
         height: field.height
-        color: "#fafafa"
+        color: "white"
 
         TextField {
             id: field
