@@ -137,7 +137,7 @@ Item {
         image.height = post.photos ? parent.width * 0.6 : 0
         article.text = post.description ? post.description.trim() : ""
         likeButton.text = post.starredNum > 0 ? ("+" + post.starredNum) : "+1"
-        likeButton.textColor = post.starred ? "#795548" : "#de000000"
+        likeButton.textColor = post.starred ? "#8d6e63" : "#de000000"
         comments.opacity = post.commentNum > 0 ? 1 : 0.62
         commentsLabel.text = post.commentNum > 0 ? post.commentNum : ""
 

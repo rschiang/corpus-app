@@ -65,6 +65,7 @@ Dialog {
                     verticalCenter: parent.verticalCenter
                 }
                 iconSource: "qrc:/assets/icon_camera"
+                enabled: false
             }
 
             IconButton {
