@@ -23,21 +23,16 @@ Menu {
         }
     }
 
-    Item {
-        width: parent.width
+    MenuItemSeparator {
         height: 8 * dp
     }
 
-    FlatButton {
-        width: parent.width
-        height: 48 * dp
+    MenuItem {
         text: "意見回饋"
         onClicked: Qt.openUrlExternally("http://goo.gl/forms/iJiDkk4C6p")
     }
 
-    FlatButton {
-        width: parent.width
-        height: 48 * dp
+    MenuItem {
         text: "結束"
         onClicked: Qt.quit()
     }
