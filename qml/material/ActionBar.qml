@@ -18,6 +18,7 @@ Item {
     PaperShadow {
         source: background
         depth: control.raised ? 2 : 1
+        cached: true
     }
 
     Rectangle {

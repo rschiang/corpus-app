@@ -20,6 +20,7 @@ Item {
         id: shadow
         source: background
         depth: card.enabled ? (card.raised ? 2 : 1) : 0
+        cached: true
     }
 
     MouseArea {

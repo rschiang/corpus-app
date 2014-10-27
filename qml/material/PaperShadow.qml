@@ -8,14 +8,16 @@ Item {
 
     property variant source
     property int depth: 0
+    property bool cached: false
 
     DropShadow {
         id: topShadow
         anchors.fill: parent
         source: control.source
         color: "#00000000"
+        cached: control.cached
         spread: 0.0
-        samples: 32
+        samples: 16
         transparentBorder: true
     }
 
@@ -24,8 +26,9 @@ Item {
         anchors.fill: parent
         source: control.source
         color: "#00000000"
+        cached: control.cached
         spread: 0.0
-        samples: 32
+        samples: 16
         transparentBorder: true
     }
 

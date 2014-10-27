@@ -20,6 +20,7 @@ Popup {
             anchors.fill: background
             source: background
             depth: 5
+            cached: true
         }
 
         Rectangle {
