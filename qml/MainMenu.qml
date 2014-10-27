@@ -7,8 +7,23 @@ Menu {
     Image {
         width: parent.width
         height: parent.width * 0.5625
+        sourceSize.width: 320 * dp
+        sourceSize.height: 320 * dp
         fillMode: Image.PreserveAspectFit
         source: "qrc:/assets/intro"
+
+        Rectangle {
+            anchors {
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+            height: 56 * dp
+            gradient: Gradient {
+                GradientStop { position: 0; color: "#00000000" }
+                GradientStop { position: 1; color: "#33000000" }
+            }
+        }
 
         IconButton {
             id: backButton
