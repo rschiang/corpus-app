@@ -109,6 +109,7 @@ Dialog {
 
     onOpening: {
         field.focus = true
+        locationButton.active = (Cache.settings.positioning !== "off")
     }
 
     onClosing: {
@@ -116,6 +117,7 @@ Dialog {
         field.text = ""
         if (position.active)
             position.stop()
+        database.set("positioning", locationButton.active ? "on" : "off")
     }
 
     onBackgroundClicked: {
