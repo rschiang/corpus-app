@@ -1,11 +1,10 @@
 import QtQuick 2.0
-import QtQuick.Window 2.0
+import QtQuick.Window 2.2
 
 Window {
     id: root
-    width: Screen.width
-    height: Screen.height
     visible: true
+    visibility: Window.FullScreen
     title: "Corpus"
     color: "#eee"
 

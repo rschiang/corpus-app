@@ -73,7 +73,6 @@ Item {
                     card.reload()
 
                     api.star(post.postId, function(e) {})
-                    console.log(width)
                 }
             }
 

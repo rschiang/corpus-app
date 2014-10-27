@@ -44,7 +44,7 @@ Item {
         id: posts
         anchors.fill: parent
         anchors.topMargin: actionBar.height
-        cacheBuffer: height * 4
+        cacheBuffer: root.height * 4
 
         topMargin: 8 * dp
         bottomMargin: 8 * dp
