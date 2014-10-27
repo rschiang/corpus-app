@@ -10,6 +10,11 @@ Item {
     property alias text: title.text
     property bool raised: false
 
+    MouseArea {
+        id: eventEater
+        anchors.fill: parent
+    }
+
     PaperShadow {
         source: background
         depth: control.raised ? 2 : 1

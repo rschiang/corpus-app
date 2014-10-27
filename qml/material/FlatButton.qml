@@ -17,7 +17,6 @@ Item {
         anchors.fill: parent
         radius: 3 * dp
         color: button.enabled ? "#00999999" : "#1a999999"
-        visible: false
     }
 
     Text {
@@ -27,7 +26,7 @@ Item {
         font.pointSize: UIConstants.bodyFontSize
         font.bold: Font.DemiBold
         font.capitalization: Font.AllUppercase
-        color: UIConstants.bodyTextColor
+        color: button.enabled ? UIConstants.bodyTextColor : UIConstants.displayTextColor
         opacity: button.enabled ? 1 : 0.62
 
         Behavior on opacity {

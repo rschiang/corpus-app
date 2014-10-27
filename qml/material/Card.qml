@@ -4,6 +4,7 @@ Item {
     id: card
 
     property bool raised: false
+    property alias mouseArea: mouseArea
 
     signal clicked
 

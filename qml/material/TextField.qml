@@ -4,7 +4,7 @@ import "."
 Item {
     id: control
     implicitWidth: input.contentWidth
-    implicitHeight: Math.max(input.contentHeight + 32 * dp, 48 * dp)
+    implicitHeight: Math.max(input.contentHeight + 24 * dp, 48 * dp)
 
     property color focusColor: "#2196f3"
 
@@ -20,7 +20,7 @@ Item {
     Text {
         id: placeholder
         anchors.fill: input
-        visible: !field.length && !field.inputMethodComposing
+        visible: !input.length && !input.inputMethodComposing
         color: "#8a999999"
         font: input.font
     }
@@ -35,6 +35,8 @@ Item {
             topMargin: 16 * dp
         }
         color: "#de000000"
+        selectionColor: "#91a7ff"
+        selectedTextColor: color
         font.family: UIConstants.sansFontFamily
         font.pointSize: UIConstants.subheadFontSize
     }
