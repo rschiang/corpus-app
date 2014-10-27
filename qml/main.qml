@@ -4,7 +4,7 @@ import QtQuick.Window 2.2
 Window {
     id: root
     visible: true
-    visibility: Window.FullScreen
+    visibility: Window.Maximized
     title: "Corpus"
     color: "#eee"
 

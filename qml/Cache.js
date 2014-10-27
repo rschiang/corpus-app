@@ -17,12 +17,13 @@ function containsPost(id) {
 
 function updateLocation(pos) {
     var coord = pos.coordinate
-    var accuracy =
-            Math.sqrt(
-                Math.pow(pos.verticalAccuracyValid ? pos.verticalAccuracy : 1000, 2) +
-                Math.pow(pos.horizontalAccuracyValid ? pos.horizontalAccuracy : 1000, 2))
+    var accuracy = (pos.horizontalAccuracyValid) ?
+        Math.max((pos.verticalAccuracyValid ? pos.verticalAccuracy : 0), pos.horizontalAccuracy) :
+        (pos.verticalAccuracyValid ? pos.verticalAccuracy : Number.MAX_VALUE)
+
     var record = { timestamp: new Date().getTime(), latitude: coord.latitude, longitude: coord.longitude, accuracy: accuracy }
     coordinates.push(record)
+    console.log(JSON.stringify(record))
 }
 
 function findBestLocation() {
