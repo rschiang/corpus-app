@@ -128,8 +128,8 @@ Dialog {
             if (pos)
                 coordinate = pos
             else if (position.valid) {
-                coordinate.latitude = position.position.latitude
-                coordinate.longitude = position.position.longitude
+                coordinate.latitude = position.position.coordinate.latitude
+                coordinate.longitude = position.position.coordinate.longitude
             }
         }
 
