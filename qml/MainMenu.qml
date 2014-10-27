@@ -4,10 +4,11 @@ import "material"
 Menu {
     id: menu
 
-    Rectangle {
+    Image {
         width: parent.width
-        height: parent.width * 0.5625 + 48 * dp
-        color: "#00bfa5"
+        height: parent.width * 0.5625
+        fillMode: Image.PreserveAspectFit
+        source: "qrc:/assets/intro"
 
         Text {
             anchors {
@@ -17,7 +18,7 @@ Menu {
                 margins: 16 * dp
             }
             font.family: UIConstants.sansFontFamily
-            font.pointSize: UIConstants.display1FontSize
+            font.pointSize: UIConstants.titleFontSize
             color: "white"
             text: "Corpus"
         }

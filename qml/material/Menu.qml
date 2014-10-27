@@ -9,9 +9,11 @@ Popup {
     Item {
         id: menu
         anchors {
-            fill: parent
-            rightMargin: 56 * dp
+            top: parent.top
+            bottom: parent.bottom
+            left: parent.left
         }
+        width: Math.min(parent.width - 56 * dp, 320 * dp)
         state: popup.state
         transform: Translate { id: menuTranslate }
 
@@ -25,7 +27,7 @@ Popup {
         Rectangle {
             id: background
             anchors.fill: parent
-            color: "#fafafa"
+            color: "white"
             visible: false
         }
 

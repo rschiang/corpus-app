@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Api.qml</file>
+        <file>Database.qml</file>
         <file>Cache.js</file>
         <file>MainView.qml</file>
         <file>PostLoader.js</file>
@@ -9,6 +10,7 @@
         <file>PostCardLayout.qml</file>
         <file>RefreshButton.qml</file>
         <file>PostDialog.qml</file>
+        <file>MainMenu.qml</file>
         <file>material/qmldir</file>
         <file>material/Style.qml</file>
         <file>material/UIConstants.qml</file>
@@ -23,9 +25,7 @@
         <file>material/Card.qml</file>
         <file>material/Popup.qml</file>
         <file>material/Dialog.qml</file>
-        <file>Database.qml</file>
         <file>material/Menu.qml</file>
-        <file>MainMenu.qml</file>
         <file>material/MenuItem.qml</file>
         <file>material/MenuItemSeparator.qml</file>
     </qresource>
@@ -40,5 +40,6 @@
         <file alias="icon_location">assets/icon_location.svg</file>
         <file alias="icon_location-colored">assets/icon_location-colored.svg</file>
         <file alias="icon_comment">assets/icon_comment.svg</file>
+        <file alias="intro">assets/intro.jpg</file>
     </qresource>
 </RCC>
