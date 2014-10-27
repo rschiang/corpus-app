@@ -47,4 +47,13 @@ Menu {
         text: "結束"
         onClicked: Qt.quit()
     }
+
+    onOpening: menu.focus = true
+    onClosing: menu.focus = false
+    Keys.onReleased: {
+        if (event.key == Qt.Key_Back) {
+            event.accepted = true
+            dialog.close()
+        }
+    }
 }
