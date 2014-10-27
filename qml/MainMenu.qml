@@ -75,7 +75,7 @@ Menu {
     Keys.onReleased: {
         if (event.key == Qt.Key_Back) {
             event.accepted = true
-            dialog.close()
+            menu.close()
         }
     }
 }
