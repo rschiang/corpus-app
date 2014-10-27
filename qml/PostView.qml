@@ -70,41 +70,51 @@ Item {
         Card {
             id: card
             width: parent.width
-            height: column.height
+            height: layout.height + column.height
             raised: true
+
+            PostCardLayout {
+                id: layout
+                postId: view.postId
+            }
 
             Column {
                 id: column
-                width: parent.width
-
-                PostCardLayout {
-                    id: layout
-                    postId: view.postId
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: layout.bottom
+                    leftMargin: 16 * dp
+                    rightMargin: 16 * dp
                 }
+                height: (comments.count > 0) ? (childrenRect.height + 16 * dp) : 0
+                spacing: 16 * dp
 
                 Repeater {
                     id: comments
                     model: ListModel {}
                     delegate: Component {
-                        Item {
-                            x: 16 * dp
-                            width: (parent ? parent.width - 32 * dp : 0)
-                            height: __text.paintedHeight + 16 * dp
-
-                            Text {
-                                id: __text
-                                width: parent.width
-                                wrapMode: Text.Wrap
-                                font.family: UIConstants.sansFontFamily
-                                font.pointSize: UIConstants.bodyFontSize
-                                color: "#de000000"
-                                text: model.content ?
-                                      "<font color='#00796b'><b>" + model.username + "</b>: </font>" + model.content :
-                                      ""
-                            }
+                        Text {
+                            id: __text
+                            width: column.width
+                            wrapMode: Text.Wrap
+                            font.family: UIConstants.sansFontFamily
+                            font.pointSize: UIConstants.bodyFontSize
+                            color: "#de000000"
+                            text: model.content ?
+                                  "<font color='#00796b'><b>" + model.username + "</b>: </font>" + model.content :
+                                  ""
                         }
                     }
+                }
 
+                add: Transition {
+                    NumberAnimation {
+                        property: "opacity"
+                        from: 0; to: 1
+                        duration: 200
+                        easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
+                    }
                 }
             }
 
@@ -113,15 +123,6 @@ Item {
                     duration: 200
                     easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
                 }
-            }
-
-            NumberAnimation {
-                id: loadedAnimation
-                target: comments
-                property: "opacity"
-                from: 0; to: 1
-                duration: 200
-                easing.type: Easing.Bezier; easing.bezierCurve: [0.4, 0, 0.2, 1, 1, 1]
             }
         }
     }
@@ -252,7 +253,6 @@ Item {
             for (var i in e)
                 comments.model.append(e[i])
             view.loading = false
-            loadedAnimation.start()
         })
     }
 
