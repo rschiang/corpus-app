@@ -23,4 +23,8 @@ Window {
     Api {
         id: api
     }
+
+    Database {
+        id: database
+    }
 }

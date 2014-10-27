@@ -2,6 +2,7 @@
 
 var posts = {}
 var coordinates = []
+var settings = {}
 
 function setPost(id, value) {
     posts[id] = value
@@ -23,7 +24,6 @@ function updateLocation(pos) {
 
     var record = { timestamp: new Date().getTime(), latitude: coord.latitude, longitude: coord.longitude, accuracy: accuracy }
     coordinates.push(record)
-    console.log(JSON.stringify(record))
 }
 
 function findBestLocation() {
