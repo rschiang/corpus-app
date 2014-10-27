@@ -16,6 +16,10 @@ Window {
         id: postView
     }
 
+    MainMenu {
+        id: menu
+    }
+
     PostDialog {
         id: postDialog
     }

@@ -26,7 +26,7 @@ QtObject {
         db.transaction(function(tx) {
             var result = tx.executeSql("SELECT * FROM settings")
             for (var i = 0; i < result.rows.length; i++) {
-                var row = result.rows.items(i)
+                var row = result.rows.item(i)
                 Cache.settings[row.key] = row.value
             }
 

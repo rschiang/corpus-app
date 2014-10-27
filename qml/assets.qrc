@@ -24,6 +24,8 @@
         <file>material/Popup.qml</file>
         <file>material/Dialog.qml</file>
         <file>Database.qml</file>
+        <file>material/Menu.qml</file>
+        <file>MainMenu.qml</file>
     </qresource>
     <qresource prefix="/assets">
         <file alias="icon_menu">assets/icon_menu.svg</file>

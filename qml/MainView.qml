@@ -27,6 +27,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
 
             iconSource: "qrc:/assets/icon_menu"
+            onClicked: menu.open()
         }
 
         RefreshButton {
