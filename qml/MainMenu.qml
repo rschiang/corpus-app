@@ -39,6 +39,13 @@ Menu {
     }
 
     MenuItem {
+        text: "版本 " + api.version
+        enabled: false
+    }
+
+    MenuItemSeparator {}
+
+    MenuItem {
         text: "意見回饋"
         onClicked: Qt.openUrlExternally("http://goo.gl/forms/iJiDkk4C6p")
     }
