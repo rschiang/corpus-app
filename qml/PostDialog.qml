@@ -38,8 +38,18 @@ Dialog {
             }
         }
 
+        Keys.onPressed: {
+            if (event.key == Qt.Key_Return) {
+                if (text.length > 12 && text.charAt(text.length - 1) == "\n") {
+                    event.accepted = true
+                    text = text.trim()
+                    send()
+                }
+            }
+        }
+
         Keys.onReleased: {
-            if (event.key == Qt.Key_Back) {
+            if (event.key == Qt.Key_Back || event.key == Qt.Key_Escape) {
                 event.accepted = true
                 dialog.close()
             }

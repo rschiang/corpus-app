@@ -23,8 +23,8 @@ Item {
                 id: image
                 width: parent.width
                 height: source != "" ? parent.width * 0.6 : 0
-                sourceSize.width: root.width
-                sourceSize.height: root.width
+                sourceSize.width: 360 * dp
+                sourceSize.height: 360 * dp
                 fillMode: Image.PreserveAspectCrop
                 clip: true
                 asynchronous: true
