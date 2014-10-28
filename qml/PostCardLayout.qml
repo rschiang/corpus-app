@@ -22,7 +22,7 @@ Item {
             Image {
                 id: image
                 width: parent.width
-                height: 0
+                height: source != "" ? parent.width * 0.6 : 0
                 sourceSize.width: root.width
                 sourceSize.height: root.width
                 fillMode: Image.PreserveAspectCrop
@@ -134,7 +134,6 @@ Item {
 
         var post = Cache.getPost(postId)
         image.source = post.photos ? api.photo(post.photos) : ""
-        image.height = post.photos ? parent.width * 0.6 : 0
         article.text = post.description ? post.description.trim() : ""
         likeButton.text = post.starredNum > 0 ? ("+" + post.starredNum) : "+1"
         likeButton.textColor = post.starred ? "#8d6e63" : "#de000000"
