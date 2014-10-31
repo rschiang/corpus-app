@@ -8,6 +8,7 @@ Item {
 
     property variant source
     property int depth: 0
+    property bool fast: !cached
     property bool cached: false
 
     DropShadow {
@@ -16,6 +17,7 @@ Item {
         source: control.source
         color: "#00000000"
         cached: control.cached
+        fast: control.fast
         spread: 0.0
         samples: 16
         transparentBorder: true
@@ -27,6 +29,7 @@ Item {
         source: control.source
         color: "#00000000"
         cached: control.cached
+        fast: control.fast
         spread: 0.0
         samples: 16
         transparentBorder: true
