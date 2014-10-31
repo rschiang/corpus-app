@@ -15,7 +15,7 @@ Item {
     MouseArea {
         id: eventEater
         anchors.fill: parent
-        enabled: (state == "visible")
+        enabled: (view.state == "visible")
     }
 
     ActionBar {

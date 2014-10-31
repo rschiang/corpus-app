@@ -79,7 +79,7 @@ Item {
 
         NumberAnimation on contentY {
             id: scrollToTopAnimation
-            to: posts.originY
+            to: -posts.topMargin
             duration: 300
             easing.type: Easing.OutCubic
             onStopped: posts.returnToBounds()
